@@ -318,33 +318,33 @@
 
   <h1>Cumulus</h1>
 
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cumulus@SN3420M-01:mgmt:~$<span class="w"> </span>nv<span class="w"> </span>show<span class="w"> </span>platform<span class="w"> </span>transceiver<span class="w"> </span>brief<span class="w"> </span><span class="c1"># after 5.11</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Transceiver<span class="w">  </span>Identifier<span class="w">  </span>Vendor<span class="w"> </span>name<span class="w">      </span>Vendor<span class="w"> </span>PN<span class="w">         </span>Vendor<span class="w"> </span>SN<span class="w">     </span>Vendor<span class="w"> </span>revision
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>-----------<span class="w">  </span>----------<span class="w">  </span>---------------<span class="w">  </span>----------------<span class="w">  </span>------------<span class="w">  </span>---------------
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>swp1<span class="w">         </span>SFP<span class="w">         </span>FINISAR<span class="w"> </span>CORP.<span class="w">    </span>FTLX8571D3BCL-HP<span class="w">  </span>MU50PR6<span class="w">       </span>A<span class="w">        </span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>swp2<span class="w">         </span>SFP<span class="w">         </span>FOXCONN<span class="w">          </span>CUFCP32-CHB01-EF<span class="w">  </span>CN02KBG0N0<span class="w">    </span>A<span class="w">        </span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>swp49<span class="w">        </span>QSFP+<span class="w">       </span>Arista<span class="w"> </span>Networks<span class="w">  </span>CAB-Q-Q-3M<span class="w">        </span>ADY17120009K<span class="w">  </span><span class="m">20</span><span class="w">   </span>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>**cumulus@SN3420M-01:mgmt:~$ nv show platform transceiver brief # after 5.11
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Transceiver  Identifier  Vendor name      Vendor PN         Vendor SN     Vendor revision
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>-----------  ----------  ---------------  ----------------  ------------  ---------------
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>swp1         SFP         FINISAR CORP.    FTLX8571D3BCL-HP  MU50PR6       A        
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>swp2         SFP         FOXCONN          CUFCP32-CHB01-EF  CN02KBG0N0    A        
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>swp49        QSFP+       Arista Networks  CAB-Q-Q-3M        ADY17120009K  20   
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>cumulus@SN3420M-01:mgmt:~$<span class="w"> </span>nv<span class="w"> </span>show<span class="w"> </span>platform<span class="w"> </span>transceiver<span class="w"> </span>swp1<span class="w"> </span><span class="c1"># before 5.11</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>cable-type<span class="w">                  </span>:<span class="w"> </span>Optical<span class="w"> </span>module
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>supported-cable-length<span class="w">      </span>:<span class="w"> </span>30m<span class="w"> </span>om1,<span class="w"> </span>80m<span class="w"> </span>om2,<span class="w"> </span>300m<span class="w"> </span>om3,<span class="w"> </span>0m<span class="w"> </span>om4,<span class="w"> </span>0m<span class="w"> </span>om5
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>supported-cable-length-smf<span class="w">  </span>:<span class="w"> </span>0m
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>diagnostics-status<span class="w">          </span>:<span class="w"> </span>Diagnostic<span class="w"> </span>Data<span class="w"> </span>Available
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>status<span class="w">                      </span>:<span class="w"> </span>plugged_enabled
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>error-status<span class="w">                </span>:<span class="w"> </span>N/A
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>vendor-date-code<span class="w">            </span>:<span class="w"> </span><span class="m">15080732</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>identifier<span class="w">                  </span>:<span class="w"> </span>SFP
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>vendor-rev<span class="w">                  </span>:<span class="w"> </span>A
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>vendor-name<span class="w">                 </span>:<span class="w"> </span>FINISAR<span class="w"> </span>CORP.
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>vendor-pn<span class="w">                   </span>:<span class="w"> </span>FTLX8571D3BCL-HP
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>vendor-sn<span class="w">                   </span>:<span class="w"> </span>MU50PR6
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>vendor-oui<span class="w">                  </span>:<span class="w"> </span><span class="m">00</span>:90:65
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>cumulus@SN3420M-01:mgmt:~$ nv show platform transceiver swp1 # before 5.11
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>cable-type                  : Optical module
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>supported-cable-length      : 30m om1, 80m om2, 300m om3, 0m om4, 0m om5
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>supported-cable-length-smf  : 0m
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>diagnostics-status          : Diagnostic Data Available
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>status                      : plugged_enabled
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>error-status                : N/A
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>vendor-date-code            : 15080732
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>identifier                  : SFP
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>vendor-rev                  : A
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>vendor-name                 : FINISAR CORP.
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>vendor-pn                   : FTLX8571D3BCL-HP
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>vendor-sn                   : MU50PR6
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>vendor-oui                  : 00:90:65
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>temperature:
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">  </span>temperature<span class="w">               </span>:<span class="w"> </span><span class="m">29</span>.18<span class="w"> </span>C
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">  </span>high-alarm-threshold<span class="w">      </span>:<span class="w"> </span><span class="m">78</span>.00<span class="w"> </span>C
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">  </span>low-alarm-threshold<span class="w">       </span>:<span class="w"> </span>-13.00<span class="w"> </span>C
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">  </span>high-warning-threshold<span class="w">    </span>:<span class="w"> </span><span class="m">73</span>.00<span class="w"> </span>C
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">  </span>low-warning-threshold<span class="w">     </span>:<span class="w"> </span>-8.00<span class="w"> </span>C
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  temperature               : 29.18 C
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  high-alarm-threshold      : 78.00 C
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>  low-alarm-threshold       : -13.00 C
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>  high-warning-threshold    : 73.00 C
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>  low-warning-threshold     : -8.00 C
 </span></code></pre></div>
 
 
