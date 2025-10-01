@@ -1,3 +1,19 @@
+/* Increase page width */
+.md-grid {
+    max-width: 1440px !important;  /* Default is 1220px */
+}
+
+/* Or for even wider pages */
+/* .md-grid {
+    max-width: 1680px !important;
+} */
+
+/* Or full width (no max width) */
+/* .md-grid {
+    max-width: none !important;
+    width: 90% !important;
+} */
+
 /* Custom code block highlight color */
 .highlight .hll {
     background-color: #3a5f3a !important;  /* Dark green */
