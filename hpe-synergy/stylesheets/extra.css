@@ -35,3 +35,20 @@
 /* .highlight .hll {
     background-color: #424242 !important;
 } */
+
+/* Spacing utility classes */
+.space-sm {
+    margin-top: 1em;
+}
+
+.space-md {
+    margin-top: 2em;
+}
+
+.space-lg {
+    margin-top: 3em;
+}
+
+.space-xl {
+    margin-top: 4em;
+}
