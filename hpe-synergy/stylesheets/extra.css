@@ -52,3 +52,26 @@
 .space-xl {
     margin-top: 4em;
 }
+
+/* Colorful feedback buttons */
+/* Happy button - Green */
+.md-feedback__icon[data-md-value="1"] {
+    color: #4caf50 !important;  /* Green */
+}
+
+.md-feedback__icon[data-md-value="1"]:hover {
+    color: #66bb6a !important;  /* Lighter green on hover */
+    transform: scale(1.2);
+    transition: all 0.2s ease;
+}
+
+/* Sad button - Red */
+.md-feedback__icon[data-md-value="0"] {
+    color: #f44336 !important;  /* Red */
+}
+
+.md-feedback__icon[data-md-value="0"]:hover {
+    color: #ef5350 !important;  /* Lighter red on hover */
+    transform: scale(1.2);
+    transition: all 0.2s ease;
+}
