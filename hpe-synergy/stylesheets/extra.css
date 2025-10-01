@@ -69,24 +69,24 @@
     gap: 2rem !important;  /* Alternative selector */
 }
 
-/* Happy button - Green */
+/* Happy button - Dark Green (professional) */
 .md-feedback__icon[data-md-value="1"] {
-    color: #4caf50 !important;  /* Green */
+    color: #2e7d32 !important;  /* Dark green */
 }
 
 .md-feedback__icon[data-md-value="1"]:hover {
-    color: #66bb6a !important;  /* Lighter green on hover */
+    color: #43a047 !important;  /* Slightly lighter on hover */
     transform: scale(1.2);
     transition: all 0.2s ease;
 }
 
-/* Sad button - Red */
+/* Sad button - Dark Red (professional) */
 .md-feedback__icon[data-md-value="0"] {
-    color: #f44336 !important;  /* Red */
+    color: #c62828 !important;  /* Dark red */
 }
 
 .md-feedback__icon[data-md-value="0"]:hover {
-    color: #ef5350 !important;  /* Lighter red on hover */
+    color: #e53935 !important;  /* Slightly lighter on hover */
     transform: scale(1.2);
     transition: all 0.2s ease;
 }
