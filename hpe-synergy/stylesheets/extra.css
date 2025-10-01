@@ -14,6 +14,23 @@
     width: 90% !important;
 } */
 
+/* Make code block text bold */
+.highlight pre,
+.highlight code {
+    font-weight: bold !important;
+}
+
+/* Or make only highlighted lines bold */
+/* .highlight .hll {
+    font-weight: bold !important;
+} */
+
+/* Increase font size in code blocks (optional) */
+/* .highlight pre,
+.highlight code {
+    font-size: 0.95em !important;
+} */
+
 /* Custom code block highlight color */
 .highlight .hll {
     background-color: #3a5f3a !important;  /* Dark green */
