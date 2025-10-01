@@ -15,15 +15,16 @@
 } */
 
 /* Make code block text bold */
-.highlight pre,
+/* Remove this to make all text normal weight */
+/* .highlight pre,
 .highlight code {
     font-weight: bold !important;
-}
-
-/* Or make only highlighted lines bold */
-/* .highlight .hll {
-    font-weight: bold !important;
 } */
+
+/* Make only highlighted lines bold + colored */
+.highlight .hll {
+    font-weight: bold !important;
+}
 
 /* Increase font size in code blocks (optional) */
 /* .highlight pre,
