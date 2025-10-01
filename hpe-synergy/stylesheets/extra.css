@@ -54,6 +54,11 @@
 }
 
 /* Colorful feedback buttons */
+/* Add spacing between buttons */
+.md-feedback__icon {
+    margin: 0 1rem !important;  /* 1rem = 16px space on each side */
+}
+
 /* Happy button - Green */
 .md-feedback__icon[data-md-value="1"] {
     color: #4caf50 !important;  /* Green */
