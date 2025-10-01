@@ -1,0 +1,37 @@
+/* Custom code block highlight color */
+.highlight .hll {
+    background-color: #3a5f3a !important;  /* Dark green */
+}
+
+/* Alternative colors you can use: */
+
+/* Bright yellow background with dark text */
+/* .highlight .hll {
+    background-color: #ffeb3b !important;
+    color: #000000 !important;
+} */
+
+/* Orange/amber */
+/* .highlight .hll {
+    background-color: #ff9800 !important;
+} */
+
+/* Red/pink */
+/* .highlight .hll {
+    background-color: #e91e63 !important;
+} */
+
+/* Purple */
+/* .highlight .hll {
+    background-color: #9c27b0 !important;
+} */
+
+/* Teal */
+/* .highlight .hll {
+    background-color: #009688 !important;
+} */
+
+/* Light gray (subtle) */
+/* .highlight .hll {
+    background-color: #424242 !important;
+} */
