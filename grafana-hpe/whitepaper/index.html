@@ -256,6 +256,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#kubernetes-and-helm-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes and Helm Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes and Helm Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Verification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -299,6 +323,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#kubernetes-and-helm-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes and Helm Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes and Helm Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Verification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -317,6 +365,33 @@
 
 <h1 id="monitoring-hpe-greenlake-servers-running-gpu-using-grafana-and-prometheus">Monitoring HPE GreenLake Servers running GPU using Grafana and Prometheus</h1>
 <h2 id="overview">Overview</h2>
+<p>HPE GreenLake provides a cloud-native platform for managing and monitoring infrastructure with built-in tools and dashboards. While GreenLake offers comprehensive native monitoring capabilities, organizations can also leverage the GreenLake API to integrate with popular open-source tools like Grafana and Prometheus. This approach enables teams to consolidate monitoring data across hybrid environments, utilize existing observability workflows, and create customized dashboards tailored to specific operational needs.</p>
+<h2 id="kubernetes-and-helm-setup">Kubernetes and Helm Setup</h2>
+<h3 id="environment-verification">Environment Verification</h3>
+<p>Before proceeding with the monitoring setup, verify that your Kubernetes cluster has the necessary components installed. The following shows a working environment with the GPU Operator and Prometheus monitoring stack deployed:</p>
+<p><strong>Services running in the gpu-operator namespace:</strong>
+- <code>gpu-operator</code>: Core service for GPU management (ClusterIP: 10.233.44.80:8080)
+- <code>nvidia-dcgm-exporter</code>: DCGM metrics exporter for Prometheus integration (ClusterIP: 10.233.15.59:9400)</p>
+<p><strong>Helm releases:</strong>
+- <code>gpu-operator-1753140595</code> (v25.3.2) in the <code>gpu-operator</code> namespace
+- <code>kube-prometheus-stack</code> (76.3.0) in the <code>monitoring</code> namespace</p>
+<p>You can verify your setup using the following commands:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wsl=&gt; k get svc -n gpu-operator 
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gpu-operator           ClusterIP   10.233.44.80   &lt;none&gt;        8080/TCP   78d
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>nvidia-dcgm-exporter   ClusterIP   10.233.15.59   &lt;none&gt;        9400/TCP   78d
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>wsl=&gt; helm list -A
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>gpu-operator-1753140595 gpu-operator    4               2025-08-14 19:20:42.329819669 -0700 MST deployed        gpu-operator-v25.3.2            v25.3.2    
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>kube-prometheus-stack   monitoring      5               2025-08-15 13:06:31.169338089 -0700 MST deployed        kube-prometheus-stack-76.3.0    v0.84.1    
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>hjma@HSTHJMA02:~
+</span></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>
+this is important
+</p>
+</blockquote>
 
 
 
