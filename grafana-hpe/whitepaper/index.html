@@ -295,18 +295,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#environment-verification" class="md-nav__link">
+  <a href="#kubernetes-cluster-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment Verification
+      Kubernetes cluster setup
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#external-access-configuration" class="md-nav__link">
+  <a href="#kubernetes-namespace-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      External Access Configuration
+      Kubernetes namespace setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helm-chart-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helm chart installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-operator-chart-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Operator chart customization
     </span>
   </a>
   
@@ -380,18 +398,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#environment-verification" class="md-nav__link">
+  <a href="#kubernetes-cluster-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment Verification
+      Kubernetes cluster setup
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#external-access-configuration" class="md-nav__link">
+  <a href="#kubernetes-namespace-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      External Access Configuration
+      Kubernetes namespace setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helm-chart-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helm chart installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-operator-chart-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Operator chart customization
     </span>
   </a>
   
@@ -431,62 +467,104 @@
 <h2 id="overview">Overview</h2>
 <p>HPE GreenLake provides a cloud-native platform for managing and monitoring infrastructure with built-in tools and dashboards. While GreenLake offers comprehensive native monitoring capabilities, organizations can also leverage the GreenLake API to integrate with popular open-source tools like Grafana and Prometheus. This approach enables teams to consolidate monitoring data across hybrid environments, utilize existing observability workflows, and create customized dashboards tailored to specific operational needs.</p>
 <h2 id="kubernetes-and-helm-setup">Kubernetes and Helm Setup</h2>
-<h3 id="environment-verification">Environment Verification</h3>
-<p>Before proceeding with the monitoring setup, verify that your Kubernetes cluster has the necessary components installed. The following shows a working environment with the GPU Operator and Prometheus monitoring stack deployed:</p>
-<p><strong>Services running in the gpu-operator namespace:</strong>
-- <code>gpu-operator</code>: Core service for GPU management (ClusterIP: 10.233.44.80:8080)
-- <code>nvidia-dcgm-exporter</code>: DCGM metrics exporter for Prometheus integration (ClusterIP: 10.233.15.59:9400)</p>
-<p><strong>Helm releases:</strong>
-- <code>gpu-operator-1753140595</code> (v25.3.2) in the <code>gpu-operator</code> namespace
-- <code>kube-prometheus-stack</code> (76.3.0) in the <code>monitoring</code> namespace</p>
-<p>You can verify your setup using the following commands:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wsl=&gt; k get svc -n gpu-operator 
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gpu-operator           ClusterIP   10.233.44.80   &lt;none&gt;        8080/TCP   78d
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>nvidia-dcgm-exporter   ClusterIP   10.233.15.59   &lt;none&gt;        9400/TCP   78d
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>wsl=&gt; helm list -A
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>gpu-operator-1753140595 gpu-operator    4               2025-08-14 19:20:42.329819669 -0700 MST deployed        gpu-operator-v25.3.2            v25.3.2    
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>kube-prometheus-stack   monitoring      5               2025-08-15 13:06:31.169338089 -0700 MST deployed        kube-prometheus-stack-76.3.0    v0.84.1    
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>hjma@HSTHJMA02:~
+<h3 id="kubernetes-cluster-setup">Kubernetes cluster setup</h3>
+<p>This demonstration environment utilizes a high-availability Kubernetes cluster consisting of three control plane nodes and two worker nodes, </p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wsl=&gt; k get node -o wide
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME                                STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>c2-cp-01.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.51   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>c2-cp-02.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.52   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>c2-cp-03.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.53   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>c2-worker-01.hst.enablement.local   Ready    &lt;none&gt;          80d   v1.32.5   10.16.160.54   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>c2-worker-02.hst.enablement.local   Ready    &lt;none&gt;          80d   v1.32.5   10.16.160.55   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
 </span></code></pre></div>
-<h3 id="external-access-configuration">External Access Configuration</h3>
-<p>The cluster has been configured with NodePort services to enable external access to Grafana and Prometheus:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>wsl=&gt; k get svc --field-selector spec.type=NodePort
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>NAME                               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>kube-prometheus-stack-grafana      NodePort   10.233.22.241   &lt;none&gt;        80:30080/TCP                    55d
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>kube-prometheus-stack-prometheus   NodePort   10.233.8.106    &lt;none&gt;        9090:30090/TCP,8080:30398/TCP   55d
+<h3 id="kubernetes-namespace-setup">Kubernetes namespace setup</h3>
+<p>The cluster is equipped with the <code>gpu-operator</code> namespace for NVIDIA GPU management and the <code>monitoring</code> namespace hosting the Prometheus stack, with external access enabled via NodePort services.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>wsl=&gt; kubectl get ns | grep -vE &#39;^(kube-|default)&#39;
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>NAME              STATUS   AGE
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gpu-operator      Active   80d
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>monitoring        Active   56d
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>wsl=&gt; k get svc -n gpu-operator 
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>gpu-operator           ClusterIP   10.233.44.80   &lt;none&gt;        8080/TCP   78d
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>nvidia-dcgm-exporter   ClusterIP   10.233.15.59   &lt;none&gt;        9400/TCP   78d
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>wsl=&gt; k get svc --field-selector spec.type=NodePort -n monitoring
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>NAME                               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>kube-prometheus-stack-grafana      NodePort   10.233.22.241   &lt;none&gt;        80:30080/TCP                    56d
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>kube-prometheus-stack-prometheus   NodePort   10.233.8.106    &lt;none&gt;        9090:30090/TCP,8080:30398/TCP   56d
+</span></code></pre></div></p>
+<h3 id="helm-chart-installation">Helm chart installation</h3>
+<p>The environment uses Helm to manage two key components: the NVIDIA GPU Operator for GPU resource management and the Kube Prometheus Stack for monitoring and observability.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>wsl=&gt; helm list -A
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>gpu-operator-1753140595 gpu-operator    4               2025-08-14 19:20:42.329819669 -0700 MST deployed        gpu-operator-v25.3.2            v25.3.2    
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>kube-prometheus-stack   monitoring      5               2025-08-15 13:06:31.169338089 -0700 MST deployed        kube-prometheus-stack-76.3.
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>0    v0.84.1    
+</span></code></pre></div>
+<h3 id="gpu-operator-chart-customization">GPU Operator chart customization</h3>
+<p>The NVIDIA GPU Operator Helm chart deploys a DCGM (Data Center GPU Manager) exporter by default, but there are important nuances:</p>
+<ul>
+<li>
+<p>The DCGM exporter Pod will be created automatically when the operator detects a node with an NVIDIA GPU and the dcgm-exporter component is enabled in its values.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>wsl=&gt; k -n gpu-operator get pods -o wide | grep dcgm
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nvidia-dcgm-exporter-gkg6d                                        1/1     Running     0          56d   10.233.117.209   c2-worker-01.hst.enablement.local   &lt;none&gt;           &lt;none&gt;
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>nvidia-dcgm-exporter-r2np6                                        1/1     Running     0          56d   10.233.114.15    c2-worker-02.hst.enablement.local   &lt;none&gt;           &lt;none&gt;
+</span></code></pre></div></p>
+</li>
+<li>
+<p>In the stock gpu-operator Helm chart from NVIDIA's repo, the DCGM exporter is enabled by default (<code>dcgmExporter.enabled: true</code>). This is from Nvidia GPU Operator Documentation.
+https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#operator-install-guide
+<img alt="alt text" src="../images/image-4.png" /></p>
+</li>
+</ul>
+<p>However:</p>
+<ol>
+<li>ServiceMonitor is not enabled by default.</li>
+<li>This means Prometheus won't automatically scrape the DCGM exporter unless you either:<ul>
+<li>Enable the ServiceMonitor (<code>dcgmExporter.serviceMonitor.enabled: true</code>), or</li>
+<li>Manually define a scrape config in Prometheus.</li>
+</ul>
+</li>
+</ol>
+<p>The gpu-operator is configured with custom values to enable Prometheus integration. The DCGM exporter runs as a ClusterIP service with ServiceMonitor enabled for automatic metrics discovery by Prometheus.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>wsl=&gt; helm get values gpu-operator-1753140595 -n gpu-operator
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>USER-SUPPLIED VALUES:
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>dcgmExporter:
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  service:
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    type: ClusterIP
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  serviceMonitor:
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    enabled: true
 </span></code></pre></div></p>
 <h3 id="gpu-utilization-simulation">GPU utilization simulation</h3>
 <p>To simulate GPU load and verify monitoring functionality, we deployed a test pod running the gpu-burn utility. This tool performs intensive GPU computations, allowing us to observe GPU utilization metrics in our monitoring dashboards.</p>
 <p>The following YAML manifest creates a pod that clones the gpu-burn repository, compiles it, and runs continuous GPU stress testing:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-burn</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">containers</span><span class="p">:</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-burn</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia/cuda:12.2.0-devel-ubuntu22.04</span><span class="w"> </span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">]</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">            </span><span class="nt">args</span><span class="p">:</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">                    </span><span class="no">apt update &amp;&amp; apt install -y git build-essential &amp;&amp; \</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">                    </span><span class="no">git clone https://github.com/wilicc/gpu-burn.git &amp;&amp; \</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">                    </span><span class="no">cd gpu-burn &amp;&amp; make &amp;&amp; ./gpu_burn 999999 </span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">            </span><span class="nt">resources</span><span class="p">:</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">                </span><span class="nt">limits</span><span class="p">:</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">                    </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-burn</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">containers</span><span class="p">:</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-burn</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia/cuda:12.2.0-devel-ubuntu22.04</span><span class="w"> </span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/bash&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">]</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">            </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">                    </span><span class="no">apt update &amp;&amp; apt install -y git build-essential &amp;&amp; \</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">                    </span><span class="no">git clone https://github.com/wilicc/gpu-burn.git &amp;&amp; \</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">                    </span><span class="no">cd gpu-burn &amp;&amp; make &amp;&amp; ./gpu_burn 999999 </span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">            </span><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">                </span><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">                    </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
 </span></code></pre></div>
 <p><strong>Key configuration details:</strong>
-- <strong>Base image</strong>: <code>nvidia/cuda:12.2.0-devel-ubuntu22.04</code> provides the CUDA development environment
-- <strong>GPU allocation</strong>: <code>nvidia.com/gpu: 1</code> requests a single GPU from the cluster
-- <strong>Runtime</strong>: <code>gpu_burn 999999</code> runs for approximately 277 hours (effectively continuous)
-- <strong>Restart policy</strong>: <code>Never</code> ensures the pod completes its run without automatic restarts</p>
+- <strong>Base image</strong>: <code>nvidia/cuda:12.2.0-devel-ubuntu22.04</code> provides the CUDA development environment<br />
+- <strong>GPU allocation</strong>: <code>nvidia.com/gpu: 1</code> requests a single GPU from the cluster<br />
+- <strong>Runtime</strong>: <code>gpu_burn 999999</code> runs for approximately 277 hours (effectively continuous)<br />
+- <strong>Restart policy</strong>: <code>Never</code> ensures the pod completes its run without automatic restarts  </p>
 <p>Deploy the pod using:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>gpu-burn.yaml
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>gpu-burn.yaml
 </span></code></pre></div></p>
 
 
