@@ -633,7 +633,7 @@
 </span></code></pre></div></p>
 </li>
 <li>
-<p>In the stock gpu-operator Helm chart from NVIDIA's repository, the DCGM exporter is enabled by default (<code>dcgmExporter.enabled: true</code>), but the ServiceMonitor is disabled by default (<code>serviceMonitor.enabled: false</code>). See the <a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#operator-install-guide">NVIDIA GPU Operator Documentation</a>.</p>
+<p>In the stock gpu-operator Helm chart from NVIDIA's repository, the DCGM exporter is enabled by default (<code>dcgmExporter.enabled: true</code>), but the ServiceMonitor is disabled by default (<code>serviceMonitor.enabled: false</code>). See the <a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#operator-install-guide">NVIDIA GPU Operator Documentation</a>. <br></p>
 </li>
 </ul>
 <p><img alt="GPU Operator Configuration" src="../images/image-4.png" /></p>
@@ -721,11 +721,11 @@
 4. Local Grafana and Prometheus UI can query local data
 5. Grafana Cloud receives a copy of all metrics</p>
 <h3 id="configure-grafana-cloud-credentials">Configure Grafana Cloud credentials</h3>
-<p>Users should login to <code>grafana.com</code> to access their grafana stack and retrive the prometheous cloud instance API endpoint by selecting "Details". 
+<p>Users should login to <code>grafana.com</code> to access their grafana stack and retrive the prometheous cloud instance API endpoint by selecting "Details". <br>
 <img alt="Grafana Cloud Portal" src="../images/CleanShot%202025-10-20%20at%2009.38.20.png" /></p>
-<p>Select "Prometheous Details"
+<p>Select "Prometheous Details" <br>
 <img alt="Stack Dashboard" src="../images/CleanShot%202025-10-20%20at%2009.41.58.png" /></p>
-<p>In <code>Prometheous Instance Details</code> page, please note "Remote Write Endpoint", "Instance ID" and generate "API Token"
+<p>In <code>Prometheous Instance Details</code> page, please note "Remote Write Endpoint", "Instance ID" and generate "API Token" <br>
 <img alt="Prometheous Instance Details" src="../images/CleanShot%202025-10-20%20at%2009.48.41.png" /></p>
 <h3 id="updating-helm-release-with-configured-value">Updating Helm release with configured value</h3>
 <ol>
@@ -764,7 +764,7 @@
 </li>
 </ol>
 <h3 id="proliant-server-nvidia-gpu-utilization-dashboard">Proliant Server Nvidia GPU utilization dashboard</h3>
-<p>The following screen shows the Grafana Cloud dashboard of HPE Proliant Server Nvidia GPU Utilization.
+<p>The following screen shows the Grafana Cloud dashboard of HPE Proliant Server Nvidia GPU Utilization. <br>
 <img alt="GPU Utilization Panel" src="../images/CleanShot%202025-10-20%20at%2010.35.20.png" /></p>
 <p>The corresponding server GPU utilization from <code>nvidia-smi</code> is shown below.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">wsl</span><span class="o">=</span>&gt;<span class="w"> </span>ssh<span class="w"> </span>user01@c2-worker-02.hst.enablement.local<span class="w"> </span>nvidia-smi
