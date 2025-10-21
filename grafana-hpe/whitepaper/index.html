@@ -712,8 +712,8 @@
 <li><strong>Update Prometheus configuration</strong> - Add remote write settings to the kube-prometheus-stack Helm values</li>
 </ol>
 <h3 id="prometheus-remote-write-diagram">Prometheus Remote Write Diagram</h3>
-<p>The following diagram from Grafana Cloud documentation shows the architecture of Prometheous remote write.
-<img alt="Prometheous Remote Write" src="../images/image-5.png" /></p>
+<p>The following diagram from Grafana Cloud documentation shows the architecture of Prometheous remote write. <br></p>
+<p><img alt="Prometheous Remote Write" src="../images/image-5.png" /></p>
 <p><strong>How it works:</strong>
 1. Prometheus scrapes metrics from all targets (DCGM exporter, kube-state-metrics, etc.)
 2. Stores metrics locally in TSDB (Time Series Database)
@@ -721,12 +721,12 @@
 4. Local Grafana and Prometheus UI can query local data
 5. Grafana Cloud receives a copy of all metrics</p>
 <h3 id="configure-grafana-cloud-credentials">Configure Grafana Cloud credentials</h3>
-<p>Users should login to <code>grafana.com</code> to access their grafana stack and retrive the prometheous cloud instance API endpoint by selecting "Details". <br>
-<img alt="Grafana Cloud Portal" src="../images/CleanShot%202025-10-20%20at%2009.38.20.png" /></p>
-<p>Select "Prometheous Details" <br>
-<img alt="Stack Dashboard" src="../images/CleanShot%202025-10-20%20at%2009.41.58.png" /></p>
-<p>In <code>Prometheous Instance Details</code> page, please note "Remote Write Endpoint", "Instance ID" and generate "API Token" <br>
-<img alt="Prometheous Instance Details" src="../images/CleanShot%202025-10-20%20at%2009.48.41.png" /></p>
+<p>Users should login to <code>grafana.com</code> to access their grafana stack and retrive the prometheous cloud instance API endpoint by selecting "Details". <br></p>
+<p><img alt="Grafana Cloud Portal" src="../images/CleanShot%202025-10-20%20at%2009.38.20.png" /></p>
+<p>Select "Prometheous Details" <br></p>
+<p><img alt="Stack Dashboard" src="../images/CleanShot%202025-10-20%20at%2009.41.58.png" /></p>
+<p>In <code>Prometheous Instance Details</code> page, please note "Remote Write Endpoint", "Instance ID" and generate "API Token" <br></p>
+<p><img alt="Prometheous Instance Details" src="../images/CleanShot%202025-10-20%20at%2009.48.41.png" /></p>
 <h3 id="updating-helm-release-with-configured-value">Updating Helm release with configured value</h3>
 <ol>
 <li>
@@ -764,8 +764,8 @@
 </li>
 </ol>
 <h3 id="proliant-server-nvidia-gpu-utilization-dashboard">Proliant Server Nvidia GPU utilization dashboard</h3>
-<p>The following screen shows the Grafana Cloud dashboard of HPE Proliant Server Nvidia GPU Utilization. <br>
-<img alt="GPU Utilization Panel" src="../images/CleanShot%202025-10-20%20at%2010.35.20.png" /></p>
+<p>The following screen shows the Grafana Cloud dashboard of HPE Proliant Server Nvidia GPU Utilization. <br></p>
+<p><img alt="GPU Utilization Panel" src="../images/CleanShot%202025-10-20%20at%2010.35.20.png" /></p>
 <p>The corresponding server GPU utilization from <code>nvidia-smi</code> is shown below.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">wsl</span><span class="o">=</span>&gt;<span class="w"> </span>ssh<span class="w"> </span>user01@c2-worker-02.hst.enablement.local<span class="w"> </span>nvidia-smi
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Mon<span class="w"> </span>Oct<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13</span>:55:11<span class="w"> </span><span class="m">2025</span><span class="w">       </span>
