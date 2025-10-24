@@ -45,3 +45,30 @@
         padding-right: 1rem;
     }
 }
+
+/* Hide site name in left sidebar to avoid redundancy */
+.md-sidebar--primary .md-sidebar__scrollwrap .md-sidebar__inner .md-nav--primary > .md-nav__title {
+    display: none;
+}
+
+/* Hide right sidebar and show TOC in left sidebar instead */
+.md-sidebar--secondary {
+    display: none;
+}
+
+/* Make left sidebar wider for TOC */
+.md-sidebar--primary {
+    width: 16rem;
+}
+
+/* Show left sidebar (undo previous hiding) */
+@media screen and (min-width: 76.25em) {
+    .md-sidebar--primary {
+        display: block;
+    }
+    
+    /* Hide right sidebar on all screens */
+    .md-sidebar--secondary {
+        display: none;
+    }
+}
