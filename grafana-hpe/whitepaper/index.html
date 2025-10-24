@@ -300,6 +300,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Benefits of Grafana Cloud Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unified-observability-across-hybrid-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unified Observability Across Hybrid Environments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -514,6 +529,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Benefits of Grafana Cloud Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unified-observability-across-hybrid-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unified Observability Across Hybrid Environments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -699,10 +729,18 @@
 <p>HPE GreenLake Compute Ops Management provides a cloud-native platform for managing and monitoring compute infrastructure with built-in tools and dashboards. While Compute Ops Management offers comprehensive native monitoring capabilities, organizations can also leverage the Compute Ops Management REST API to integrate with popular open-source tools like Grafana and Prometheus. This approach enables teams to consolidate monitoring data across hybrid environments, utilize existing observability workflows, and create customized dashboards tailored to specific operational needs—particularly for GPU-accelerated workloads running on HPE servers.</p>
 <h2 id="benefits-of-grafana-cloud-integration">Benefits of Grafana Cloud Integration</h2>
 <p>Grafana Cloud provides a centralized monitoring platform that bridges both public cloud APIs and private infrastructure metrics, offering several key advantages:</p>
-<p><strong>Unified Observability Across Hybrid Environments:</strong>
-- <strong>HPE GreenLake API Integration</strong>: Using the Infinity data source plugin, Grafana Cloud can directly query HPE GreenLake Compute Ops Management REST APIs to retrieve server health, firmware status, and hardware telemetry data from your public cloud-managed infrastructure
-- <strong>Internal Metrics Aggregation</strong>: Simultaneously receives GPU utilization, Kubernetes cluster metrics, and application performance data from your on-premises Prometheus instances via remote write protocol
-- <strong>Single Pane of Glass</strong>: Consolidates metrics from both HPE GreenLake-managed servers and local GPU workloads into unified dashboards</p>
+<h3 id="unified-observability-across-hybrid-environments">Unified Observability Across Hybrid Environments</h3>
+<ul>
+<li>
+<p><strong>HPE GreenLake API Integration</strong>: Using the Infinity data source plugin, Grafana Cloud can directly query HPE GreenLake Compute Ops Management REST APIs to retrieve server health, firmware status, and hardware telemetry data from your public cloud-managed infrastructure</p>
+</li>
+<li>
+<p><strong>Internal Metrics Aggregation</strong>: Simultaneously receives GPU utilization, Kubernetes cluster metrics, and application performance data from your on-premises Prometheus instances via remote write protocol</p>
+</li>
+<li>
+<p><strong>Single Pane of Glass</strong>: Consolidates metrics from both HPE GreenLake-managed servers and local GPU workloads into unified dashboards</p>
+</li>
+</ul>
 <h2 id="api-accessing-hpe-greenlake-compute-ops-management">API Accessing HPE GreenLake Compute Ops Management</h2>
 <p>In order for Grafana Cloud to access HPE GreenLake Compute Ops Management, we need to first create client API user and obtain user secret. For details, please see <a href="https://developer.greenlake.hpe.com/docs/greenlake/guides/public/authentication/authentication#creating-a-personal-api-client">HPE GreenLake access token instructions</a></p>
 <p>The following screen shows the "Personal API endpoints" creation in the workspace dashboard.</p>
@@ -715,10 +753,7 @@
 - <strong>REST API integration</strong> - Query HPE GreenLake Compute Ops Management APIs directly from Grafana
 - <strong>OAuth2 authentication</strong> - Native support for token-based authentication flows
 - <strong>Data transformation</strong> - Parse JSON responses and transform them into visualization-ready formats</p>
-<p>This Infinity plugin supports automatic token refresh when accessing HPE GreenLake Compute Ops Management. 
-The implementation leverages Go's built-in <code>golang.org/x/oauth2</code> library, which automatically handles token 
-refresh logic when the access token expires. The OAuth2 token source automatically refreshes the access token 
-using the refresh token before making API requests, ensuring uninterrupted authentication without manual intervention.</p>
+<p>This Infinity plugin supports automatic token refresh when accessing HPE GreenLake Compute Ops Management. The implementation leverages Go's built-in <code>golang.org/x/oauth2</code> library, which automatically handles token refresh logic when the access token expires. The OAuth2 token source automatically refreshes the access token using the refresh token before making API requests, ensuring uninterrupted authentication without manual intervention.</p>
 <p>The configuration of the Infinity data source is shown below. Users need to provide the HPE GreenLake API Client ID/Secret and also allow access to the API endpoints.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/image-8.png" data-desc-position="bottom"><img alt="Grafana Cloud Infinity Datasource" src="../images/image-8.png"></a></p>
 <h3 id="grafana-cloud-dashboard">Grafana Cloud Dashboard</h3>
