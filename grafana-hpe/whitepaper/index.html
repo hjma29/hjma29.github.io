@@ -749,10 +749,18 @@
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/image-7.png" data-desc-position="bottom"><img alt="Personal API Client ID and Secret " src="../images/image-7.png"></a></p>
 <h3 id="infinity-data-source">Infinity Data Source</h3>
 <p>The Grafana Infinity data source enables direct integration with HPE GreenLake REST APIs, allowing users to query and visualize data from any HTTP/REST endpoint without requiring custom backend development. Originally a community-driven plugin, Infinity was officially adopted by Grafana Labs and is now maintained as part of the core Grafana ecosystem. This transition ensures long-term support, regular updates, and better integration with Grafana's authentication frameworks.</p>
-<p>Key capabilities include:
-- <strong>REST API integration</strong> - Query HPE GreenLake Compute Ops Management APIs directly from Grafana
-- <strong>OAuth2 authentication</strong> - Native support for token-based authentication flows
-- <strong>Data transformation</strong> - Parse JSON responses and transform them into visualization-ready formats</p>
+<p>Key capabilities include:</p>
+<ul>
+<li>
+<p><strong>REST API integration</strong> - Query HPE GreenLake Compute Ops Management APIs directly from Grafana</p>
+</li>
+<li>
+<p><strong>OAuth2 authentication</strong> - Native support for token-based authentication flows</p>
+</li>
+<li>
+<p><strong>Data transformation</strong> - Parse JSON responses and transform them into visualization-ready formats</p>
+</li>
+</ul>
 <p>This Infinity plugin supports automatic token refresh when accessing HPE GreenLake Compute Ops Management. The implementation leverages Go's built-in <code>golang.org/x/oauth2</code> library, which automatically handles token refresh logic when the access token expires. The OAuth2 token source automatically refreshes the access token using the refresh token before making API requests, ensuring uninterrupted authentication without manual intervention.</p>
 <p>The configuration of the Infinity data source is shown below. Users need to provide the HPE GreenLake API Client ID/Secret and also allow access to the API endpoints.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/image-8.png" data-desc-position="bottom"><img alt="Grafana Cloud Infinity Datasource" src="../images/image-8.png"></a></p>
@@ -963,10 +971,18 @@
 </span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>+-----------------------------------------------------------------------------------------+
 </span></code></pre></div><p></p>
 <h2 id="acknowledgements">Acknowledgements</h2>
-<p>Special thanks to HPE's Lionel Jullien for his excellent work on HPE GreenLake Compute Ops Management:
-- <a href="https://developer.hpe.com/blog/how-to-monitor-hpe-compute-ops-management/">How to monitor HPE GreenLake Compute Ops Management infrastructure with Grafana Metrics Dashboards</a>
-- <a href="https://github.com/jullienl/HPE-Compute-Ops-Management/tree/main">GitHub repository for HPE GreenLake Compute Ops Management</a>
-- <a href="https://www.postman.com/jullienl/lionel-jullien-s-public-workspace/collection/g40uur1/hpe-compute-ops-management">Postman collection for HPE GreenLake Compute Ops Management RESTful API</a></p>
+<p>Special thanks to HPE's Lionel Jullien for his excellent work on HPE GreenLake Compute Ops Management:</p>
+<ul>
+<li>
+<p><a href="https://developer.hpe.com/blog/how-to-monitor-hpe-compute-ops-management/">How to monitor HPE GreenLake Compute Ops Management infrastructure with Grafana Metrics Dashboards</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jullienl/HPE-Compute-Ops-Management/tree/main">GitHub repository for HPE GreenLake Compute Ops Management</a></p>
+</li>
+<li>
+<p><a href="https://www.postman.com/jullienl/lionel-jullien-s-public-workspace/collection/g40uur1/hpe-compute-ops-management">Postman collection for HPE GreenLake Compute Ops Management RESTful API</a></p>
+</li>
+</ul>
 
 
 
