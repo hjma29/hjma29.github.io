@@ -1,0 +1,47 @@
+/* Increase max width for wide screens (1920x1080) */
+.md-grid {
+    max-width: 1920px;
+}
+
+.md-main__inner {
+    max-width: none;
+}
+
+/* Make the main content area much wider */
+.md-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Reduce sidebar widths to give more space to content */
+.md-sidebar--primary {
+    width: 12rem;
+}
+
+.md-sidebar--secondary {
+    width: 12rem;
+}
+
+/* Make code blocks wider and prevent unnecessary scrolling */
+.md-typeset pre {
+    max-width: 100%;
+}
+
+.md-typeset pre > code {
+    white-space: pre;
+    overflow-x: auto;
+    display: block;
+}
+
+/* Make tables wider */
+.md-typeset table:not([class]) {
+    max-width: 100%;
+}
+
+/* Adjust container padding for wider screens */
+@media screen and (min-width: 76.25em) {
+    .md-main__inner {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
