@@ -343,36 +343,62 @@
 
   <h1>Interfaces</h1>
 
-<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp"># </span>show<span class="w"> </span>transceiver<span class="w"> </span>brief
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">$ </span>nv<span class="w"> </span>show<span class="w"> </span>platform<span class="w"> </span>transceiver<span class="w"> </span>brief<span class="w"> </span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">Transceiver  Identifier  Vendor name      Vendor PN         Vendor SN     Vendor revision</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">-----------  ----------  ---------------  ----------------  ------------  ---------------</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">swp1         SFP         FINISAR CORP.    FTLX8571D3BCL-HP  MU50PR6       A        </span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">swp2         SFP         FOXCONN          CUFCP32-CHB01-EF  CN02KBG0N0    A        </span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">swp49        QSFP+       Arista Networks  CAB-Q-Q-3M        ADY17120009K  20   </span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp"># </span>After<span class="w"> </span><span class="m">5</span>.11
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">$ </span>nv<span class="w"> </span>show<span class="w"> </span>platform<span class="w"> </span>transceiver<span class="w"> </span>swp1
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="go">cable-type                  : Optical module</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="go">supported-cable-length      : 30m om1, 80m om2, 300m om3, 0m om4, 0m om5</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">supported-cable-length-smf  : 0m</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="go">diagnostics-status          : Diagnostic Data Available</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">status                      : plugged_enabled</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">error-status                : N/A</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="go">vendor-date-code            : 15080732</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">identifier                  : SFP</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="go">vendor-rev                  : A</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="go">vendor-name                 : FINISAR CORP.</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">vendor-pn                   : FTLX8571D3BCL-HP</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="go">vendor-sn                   : MU50PR6</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="go">vendor-oui                  : 00:90:65</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="go">temperature:</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="go">  temperature               : 29.18 C</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="go">  high-alarm-threshold      : 78.00 C</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="go">  low-alarm-threshold       : -13.00 C</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="go">  high-warning-threshold    : 73.00 C</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="go">  low-warning-threshold     : -8.00 C</span>
-</span></code></pre></div>
+<div class="language-text highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="hll">$ nv show platform transceiver brief 
+</span></span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>Transceiver  Identifier  Vendor name      Vendor PN         Vendor SN     Vendor revision
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>-----------  ----------  ---------------  ----------------  ------------  ---------------
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>swp1         SFP         FINISAR CORP.    FTLX8571D3BCL-HP  MU50PR6       A        
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a>swp2         SFP         FOXCONN          CUFCP32-CHB01-EF  CN02KBG0N0    A        
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>swp49        QSFP+       Arista Networks  CAB-Q-Q-3M        ADY17120009K  20   
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a># After 5.11
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>$ nv show platform transceiver swp1
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>cable-type                  : Optical module
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>supported-cable-length      : 30m om1, 80m om2, 300m om3, 0m om4, 0m om5
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a>supported-cable-length-smf  : 0m
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>diagnostics-status          : Diagnostic Data Available
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>status                      : plugged_enabled
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>error-status                : N/A
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>vendor-date-code            : 15080732
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>identifier                  : SFP
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>vendor-rev                  : A
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>vendor-name                 : FINISAR CORP.
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>vendor-pn                   : FTLX8571D3BCL-HP
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>vendor-sn                   : MU50PR6
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>vendor-oui                  : 00:90:65
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>temperature:
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>  temperature               : 29.18 C
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>  high-alarm-threshold      : 78.00 C
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>  low-alarm-threshold       : -13.00 C
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>  high-warning-threshold    : 73.00 C
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>  low-warning-threshold     : -8.00 C
+</span></code></pre></div></td></tr></tbody></table></div>
 
 
 
