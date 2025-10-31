@@ -583,7 +583,7 @@
 <h2 id="kubernetes-and-helm-setup">Kubernetes and Helm Setup</h2>
 <h3 id="kubernetes-cluster-setup">Kubernetes cluster setup</h3>
 <p>This demonstration environment utilizes a high-availability Kubernetes cluster consisting of three control plane nodes and two worker nodes.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cmd=&gt; k get node -o wide
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ k get node -o wide
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME                                STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>c2-cp-01.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.51   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>c2-cp-02.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.52   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
@@ -593,37 +593,37 @@
 </span></code></pre></div>
 <h3 id="kubernetes-namespace-setup">Kubernetes namespace setup</h3>
 <p>The cluster is equipped with the <code>gpu-operator</code> namespace for NVIDIA GPU management and the <code>monitoring</code> namespace hosting the Prometheus stack, with external access enabled via NodePort services.
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cmd=&gt; kubectl get ns | grep -vE '^(kube-|default)'
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ kubectl get ns | grep -vE '^(kube-|default)'
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>NAME              STATUS   AGE
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gpu-operator      Active   80d
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>monitoring        Active   56d
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>cmd=&gt; k get svc -n gpu-operator 
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>$ k get svc -n gpu-operator 
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>gpu-operator           ClusterIP   10.233.44.80   &lt;none&gt;        8080/TCP   78d
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>nvidia-dcgm-exporter   ClusterIP   10.233.15.59   &lt;none&gt;        9400/TCP   78d
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>cmd=&gt; k get svc --field-selector spec.type=NodePort -n monitoring
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>$ k get svc --field-selector spec.type=NodePort -n monitoring
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>NAME                               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>kube-prometheus-stack-grafana      NodePort   10.233.22.241   &lt;none&gt;        80:30080/TCP                    56d
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>kube-prometheus-stack-prometheus   NodePort   10.233.8.106    &lt;none&gt;        9090:30090/TCP,8080:30398/TCP   56d
 </span></code></pre></div><p></p>
 <h3 id="helm-charts">Helm Charts</h3>
 <p>The environment uses Helm to manage two key components: the NVIDIA GPU Operator for GPU resource management and the Kube Prometheus Stack for monitoring and observability.</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">cmd=&gt; helm list -A</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">gpu-operator-1753140595 gpu-operator    4               2025-08-14 19:20:42.329819669 -0700 MST deployed        gpu-operator-v25.3.2            v25.3.2    </span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">kube-prometheus-stack   monitoring      5               2025-08-15 13:06:31.169338089 -0700 MST deployed        kube-prometheus-stack-76.3.</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">0    v0.84.1    </span>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ helm list -A
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>gpu-operator-1753140595 gpu-operator    4               2025-08-14 19:20:42.329819669 -0700 MST deployed        gpu-operator-v25.3.2            v25.3.2    
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>kube-prometheus-stack   monitoring      5               2025-08-15 13:06:31.169338089 -0700 MST deployed        kube-prometheus-stack-76.3.
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>0    v0.84.1    
 </span></code></pre></div>
 <h3 id="gpu-operator-chart-customization">GPU Operator chart customization</h3>
 <p>The NVIDIA GPU Operator Helm chart deploys a DCGM (Data Center GPU Manager) exporter by default, but there are important nuances:</p>
 <ul>
 <li>
 <p>The DCGM exporter Pod will be created automatically when the operator detects a node with an NVIDIA GPU and the dcgm-exporter component is enabled in its values.
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span>k<span class="w"> </span>-n<span class="w"> </span>gpu-operator<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dcgm
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nvidia-dcgm-exporter-gkg6d<span class="w">                                        </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">     </span><span class="m">0</span><span class="w">          </span>56d<span class="w">   </span><span class="m">10</span>.233.117.209<span class="w">   </span>c2-worker-01.hst.enablement.local<span class="w">   </span>&lt;none&gt;<span class="w">           </span>&lt;none&gt;
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>nvidia-dcgm-exporter-r2np6<span class="w">                                        </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">     </span><span class="m">0</span><span class="w">          </span>56d<span class="w">   </span><span class="m">10</span>.233.114.15<span class="w">    </span>c2-worker-02.hst.enablement.local<span class="w">   </span>&lt;none&gt;<span class="w">           </span>&lt;none&gt;
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ k -n gpu-operator get pods -o wide | grep dcgm
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nvidia-dcgm-exporter-gkg6d                                        1/1     Running     0          56d   10.233.117.209   c2-worker-01.hst.enablement.local   &lt;none&gt;           &lt;none&gt;
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>nvidia-dcgm-exporter-r2np6                                        1/1     Running     0          56d   10.233.114.15    c2-worker-02.hst.enablement.local   &lt;none&gt;           &lt;none&gt;
 </span></code></pre></div><p></p>
 </li>
 <li>
@@ -632,33 +632,33 @@
 </ul>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/image-4.png" data-desc-position="bottom"><img alt="GPU Operator Configuration" src="../images/image-4.png"></a></p>
 <p>You can also verify these default built-in values using the <code>helm show values</code> command. 
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span>helm<span class="w"> </span>show<span class="w"> </span>values<span class="w"> </span>nvidia/gpu-operator<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">15</span><span class="w"> </span>dcgmExporter
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ helm show values nvidia/gpu-operator | grep -A 15 dcgmExporter
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>dcgmExporter:
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>enabled:<span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>repository:<span class="w"> </span>nvcr.io/nvidia/k8s
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>image:<span class="w"> </span>dcgm-exporter
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>version:<span class="w"> </span><span class="m">4</span>.3.1-4.4.0-ubuntu22.04
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span>imagePullPolicy:<span class="w"> </span>IfNotPresent
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span>env:<span class="w"> </span><span class="o">[]</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span>resources:<span class="w"> </span><span class="o">{}</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span>service:
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span>internalTrafficPolicy:<span class="w"> </span>Cluster
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span>serviceMonitor:
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span>enabled:<span class="w"> </span><span class="nb">false</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span>interval:<span class="w"> </span>15s
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span>honorLabels:<span class="w"> </span><span class="nb">false</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span>additionalLabels:<span class="w"> </span><span class="o">{}</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span>relabelings:<span class="w"> </span><span class="o">[]</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  enabled: true
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  repository: nvcr.io/nvidia/k8s
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  image: dcgm-exporter
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  version: 4.3.1-4.4.0-ubuntu22.04
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  imagePullPolicy: IfNotPresent
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  env: []
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  resources: {}
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  service:
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    internalTrafficPolicy: Cluster
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>  serviceMonitor:
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    enabled: false
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    interval: 15s
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    honorLabels: false
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    additionalLabels: {}
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    relabelings: []
 </span></code></pre></div><p></p>
 <p>We need to enable  the ServiceMonitor (<code>dcgmExporter.serviceMonitor.enabled: true</code>) in order for Prometheus to automatically scrape the DCGM exporter.</p>
 <p>The gpu-operator is configured with custom values to enable Prometheus integration. The DCGM exporter runs as a ClusterIP service with ServiceMonitor enabled for automatic metrics discovery by Prometheus.
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span>helm<span class="w"> </span>get<span class="w"> </span>values<span class="w"> </span>gpu-operator-1753140595<span class="w"> </span>-n<span class="w"> </span>gpu-operator
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>USER-SUPPLIED<span class="w"> </span>VALUES:
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ helm get values gpu-operator-1753140595 -n gpu-operator
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>USER-SUPPLIED VALUES:
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>dcgmExporter:
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>service:
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span>type:<span class="w"> </span>ClusterIP
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span>serviceMonitor:
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span>enabled:<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  service:
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    type: ClusterIP
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  serviceMonitor:
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    enabled: true
 </span></code></pre></div><p></p>
 <h3 id="gpu-utilization-simulation">GPU utilization simulation</h3>
 <p>To simulate GPU load and verify monitoring functionality, we deployed a test pod running the gpu-burn utility. This tool performs intensive GPU computations, allowing us to observe GPU utilization metrics in our monitoring dashboards.</p>
@@ -688,7 +688,7 @@
 - <strong>Runtime</strong>: <code>gpu_burn 999999</code> runs for approximately 277 hours (effectively continuous)<br>
 - <strong>Restart policy</strong>: <code>Never</code> ensures the pod completes its run without automatic restarts  </p>
 <p>Deploy the pod using:
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>gpu-burn.yaml
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl apply -f gpu-burn.yaml
 </span></code></pre></div><p></p>
 <h2 id="grafana-cloud-integration">Grafana Cloud Integration</h2>
 <p>While the local Grafana deployment provides comprehensive monitoring capabilities, organizations often need to share dashboards with team members who cannot directly access the internal infrastructure. Grafana Cloud offers an ideal solution by enabling metrics to be pushed from the local Prometheus instance to a cloud-hosted environment, making dashboards accessible to remote teams without requiring VPN or direct network access.</p>
@@ -725,19 +725,19 @@
 <ol>
 <li>
 <p>Create a Kubernetes secret to store the username and password to access the Prometheus cloud instance
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span><span class="nv">GRAFANA_CLOUD_USER</span><span class="o">=</span><span class="s2">"&lt;your userid here&gt;"</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span><span class="nv">GRAFANA_CLOUD_PASSWORD</span><span class="o">=</span><span class="s2">"&lt;you token here&gt;"</span>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ GRAFANA_CLOUD_USER="&lt;your userid here&gt;"
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>$ GRAFANA_CLOUD_PASSWORD="&lt;you token here&gt;"
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>grafana-cloud-credentials<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>--from-literal<span class="o">=</span><span class="nv">username</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">GRAFANA_CLOUD_USER</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span>--from-literal<span class="o">=</span><span class="nv">password</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">GRAFANA_CLOUD_PASSWORD</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>secret/grafana-cloud-credentials<span class="w"> </span>created
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>$ kubectl create secret generic grafana-cloud-credentials \
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  --from-literal=username="${GRAFANA_CLOUD_USER}" \
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>  --from-literal=password="${GRAFANA_CLOUD_PASSWORD}" \
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>  -n monitoring
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>secret/grafana-cloud-credentials created
 </span></code></pre></div><p></p>
 </li>
 <li>
 <p>Create a Helm custom values YAML file
-</p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="l l-Scalar l-Scalar-Plain">cmd=&gt; cat prometheus-remote-write-values.yaml</span><span class="w"> </span>
+</p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="l l-Scalar l-Scalar-Plain">$ cat prometheus-remote-write-values.yaml</span><span class="w"> </span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="l l-Scalar l-Scalar-Plain">prometheus</span><span class="p p-Indicator">:</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">prometheusSpec</span><span class="p">:</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">remoteWrite</span><span class="p">:</span>
@@ -753,36 +753,36 @@
 </li>
 <li>
 <p>Upgrade the Helm release
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span>helm<span class="w"> </span>upgrade<span class="w"> </span>kube-prometheus-stack<span class="w"> </span>prometheus-community/kube-prometheus-stack<span class="w">   </span>-n<span class="w"> </span>monitoring<span class="w">   </span>-f<span class="w"> </span>prometheus-remote-write-values.yaml<span class="w">   </span>--reuse-values
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack   -n monitoring   -f prometheus-remote-write-values.yaml   --reuse-values
 </span></code></pre></div><p></p>
 </li>
 </ol>
 <h3 id="proliant-server-nvidia-gpu-utilization-dashboard">Proliant Server Nvidia GPU utilization dashboard</h3>
 <p>The following screen shows the Grafana Cloud dashboard of HPE Proliant Server Nvidia GPU Utilization.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/CleanShot%202025-10-20%20at%2010.35.20.png" data-desc-position="bottom"><img alt="GPU Utilization Panel" src="../images/CleanShot%202025-10-20%20at%2010.35.20.png"></a></p>
-<p>The corresponding server GPU utilization from <code>nvidia-smi</code> is shown below.
-</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">cmd</span><span class="o">=</span>&gt;<span class="w"> </span>ssh<span class="w"> </span>user01@c2-worker-02.hst.enablement.local<span class="w"> </span>nvidia-smi
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Mon<span class="w"> </span>Oct<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">13</span>:55:11<span class="w"> </span><span class="m">2025</span><span class="w">       </span>
+<p>The corresponding server GPU utilization from <code>nvidia-smi</code> is shown below.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ ssh user01@c2-worker-02.hst.enablement.local nvidia-smi
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Mon Oct 20 13:55:11 2025       
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>+-----------------------------------------------------------------------------------------+
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">570</span>.133.20<span class="w">             </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">570</span>.133.20<span class="w">     </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">12</span>.8<span class="w">     </span><span class="p">|</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">|</span>-----------------------------------------+------------------------+----------------------+
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">|</span><span class="w"> </span>GPU<span class="w">  </span>Name<span class="w">                 </span>Persistence-M<span class="w"> </span><span class="p">|</span><span class="w"> </span>Bus-Id<span class="w">          </span>Disp.A<span class="w"> </span><span class="p">|</span><span class="w"> </span>Volatile<span class="w"> </span>Uncorr.<span class="w"> </span>ECC<span class="w"> </span><span class="p">|</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">|</span><span class="w"> </span>Fan<span class="w">  </span>Temp<span class="w">   </span>Perf<span class="w">          </span>Pwr:Usage/Cap<span class="w"> </span><span class="p">|</span><span class="w">           </span>Memory-Usage<span class="w"> </span><span class="p">|</span><span class="w"> </span>GPU-Util<span class="w">  </span>Compute<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="p">|</span><span class="w">                                         </span><span class="p">|</span><span class="w">                        </span><span class="p">|</span><span class="w">               </span>MIG<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">|</span><span class="o">=========================================</span>+<span class="o">========================</span>+<span class="o">======================</span><span class="p">|</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span>NVIDIA<span class="w"> </span>L40S-4C<span class="w">                 </span>On<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">00000000</span>:02:00.0<span class="w"> </span>Off<span class="w"> </span><span class="p">|</span><span class="w">                    </span><span class="m">0</span><span class="w"> </span><span class="p">|</span>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="p">|</span><span class="w"> </span>N/A<span class="w">   </span>N/A<span class="w">    </span>P0<span class="w">            </span>N/A<span class="w">  </span>/<span class="w">  </span>N/A<span class="w">  </span><span class="p">|</span><span class="w">    </span>3002MiB<span class="w"> </span>/<span class="w">   </span>4096MiB<span class="w"> </span><span class="p">|</span><span class="w">     </span><span class="m">99</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">|</span><span class="w">                                         </span><span class="p">|</span><span class="w">                        </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>| NVIDIA-SMI 570.133.20             Driver Version: 570.133.20     CUDA Version: 12.8     |
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>|-----------------------------------------+------------------------+----------------------+
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>|                                         |                        |               MIG M. |
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>|=========================================+========================+======================|
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>|   0  NVIDIA L40S-4C                 On  |   00000000:02:00.0 Off |                    0 |
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>| N/A   N/A    P0            N/A  /  N/A  |    3002MiB /   4096MiB |     99%      Default |
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>|                                         |                        |                  N/A |
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>+-----------------------------------------+------------------------+----------------------+
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
 </span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>+-----------------------------------------------------------------------------------------+
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                              </span><span class="p">|</span>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">              </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                        </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>
-</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="p">|</span><span class="w">        </span>ID<span class="w">   </span>ID<span class="w">                                                               </span>Usage<span class="w">      </span><span class="p">|</span>
-</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="p">|</span><span class="o">=========================================================================================</span><span class="p">|</span>
-</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="p">|</span><span class="w">    </span><span class="m">0</span><span class="w">   </span>N/A<span class="w">  </span>N/A<span class="w">         </span><span class="m">3712514</span><span class="w">      </span>C<span class="w">   </span>./gpu_burn<span class="w">                             </span>2997MiB<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>| Processes:                                                                              |
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>|        ID   ID                                                               Usage      |
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>|=========================================================================================|
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>|    0   N/A  N/A         3712514      C   ./gpu_burn                             2997MiB |
 </span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>+-----------------------------------------------------------------------------------------+
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>Special thanks to HPE's Lionel Jullien for his excellent work on HPE GreenLake Compute Ops Management. The Grafana dashboard in this article was based on his previous work and articles as below.</p>
 <ul>
