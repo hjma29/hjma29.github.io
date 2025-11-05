@@ -609,8 +609,10 @@
 
   <h1>Upgrade</h1>
 
-<p>!!! Note
-    The supported upgrade path is the base image plus two. For example, if the starting image is Cumulus Linux 5.2, the latest release that package upgrade supports is Cumulus Linux 5.4 (5.2 + 2 = 5.4). <a href="https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-51/Installation-Management/Upgrading-Cumulus-Linux/">Nvidia Upgrading Cumulus Linux</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The supported upgrade path is the base image plus two. For example, if the starting image is Cumulus Linux 5.2, the latest release that package upgrade supports is Cumulus Linux 5.4 (5.2 + 2 = 5.4). <a href="https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-51/Installation-Management/Upgrading-Cumulus-Linux/">Nvidia Upgrading Cumulus Linux</a></p>
+</div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cumulus@SN3420M-02:mgmt:~$ cd /etc/apt
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cumulus@SN3420M-02:mgmt:/etc/apt$ ls
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>apt.conf.d  auth.conf.d  keyrings  preferences.d  **sources.list**  sources.list.d  sources.list.dpkg-dist  trusted.gpg  trusted.gpg~  trusted.gpg.d
