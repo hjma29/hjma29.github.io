@@ -6,10 +6,10 @@
       
       
       
-        <link rel="prev" href="../interface/">
+        <link rel="prev" href="../system/">
       
       
-        <link rel="next" href="../mlag/">
+        <link rel="next" href="../upgrade/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -17,7 +17,7 @@
     
     
       
-        <title>Inventory - Nvidia Cumulus Technical Notes</title>
+        <title>Troubleshooting - Nvidia Cumulus Technical Notes</title>
       
     
     
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inventory
+              Troubleshooting
             
           </span>
         </div>
@@ -351,17 +351,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../inventory/" class="md-nav__link">
         
   
   
@@ -372,7 +365,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -491,10 +483,17 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -505,6 +504,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -607,31 +607,33 @@
 
 
 
-  <h1>Inventory</h1>
+  <h1>Troubleshooting</h1>
 
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ nv show system
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                 operational                                  applied   
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>---------------  -------------------------------------------  ----------
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>build            Cumulus Linux 5.11.0                                   
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>uptime           153 days, 11:18:39                                     
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>hostname         SN3420M-01                                   SN3420M-01
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>product-name     Cumulus Linux                                          
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>product-release  5.9.1                                                  
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>platform         x86_64-mlnx_msn3420-r0                                 
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>system-memory    3.10 GB used / 1.41 GB free / 7.40 GB total            
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>swap-memory      0 Bytes used / 0 Bytes free / 0 Bytes total            
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>health-status    OK                                                     
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>date-time        2025-10-01 19:05:38                                    
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>status           N/A                                                    
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>timezone         US/Central                                   US/Central
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>maintenance                                                             
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  mode           disabled                                               
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  ports          enabled                                                
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>version                                                                 
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  kernel         6.1.0-cl-1-amd64                                       
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  build-date     Mon May 13 22:42:26 UTC 2024                           
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  image          5.9.1.0001                                             
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  onie           2022.08-5.3.0010-115200   
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cumulus@SN3420M-01:mgmt:~$ nv show system wjh packet-buffer | head
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>#   dMAC               dPort  Dst IP:Port                      EthType  Drop group  IP Proto  Drop reason - Recommended action                                                                                                                                                      Severity  sMAC               sPort  Src IP:Port            Timestamp              VLAN
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>--  -----------------  -----  -------------------------------  -------  ----------  --------  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  --------  -----------------  -----  ---------------------  ---------------------  ----
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>1   01:00:5e:00:00:02  N/A    224.0.0.2:1985                   Dot1Q    L2          udp       Ingress VLAN filtering - Validate the VLAN membership configuration on both ends of the link                                                                                          Error     00:2a:6a:13:f2:81  swp2   10.16.100.254:1985     25/04/30 10:31:38.897  100
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2   33:33:00:01:00:02  N/A    [ff02::1:2]:547 (dhcpv6-server)  Dot1Q    L2          udp       Ingress VLAN filtering - Validate the VLAN membership :bf10]:546 (dhcpv6-client)                                                              configuration on both ends of the link  Error     80:e0:1d:4a:bf:10  swp2   [fe80::82e0:1dff:fe4a  25/04/30 10:31:39.307  40
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>3   ff:ff:ff:ff:ff:ff  N/A    N/A                              Dot1Q    L2          N/A       Ingress VLAN filtering - Validate the VLAN membership configuration on both ends of the link                                                                                          Error     00:0c:29:f3:7a:19  swp2   N/A                    25/04/30 10:31:39.472  40
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>cumulus@SN3420M-01:mgmt:~$ ethtool -S swp49
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>NIC statistics:
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     HwIfInOctets: 4912388
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>     HwIfInUcastPkts: 14151
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>     HwIfInBcastPkts: 2432
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>     HwIfInMcastPkts: 11935
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>     HwIfOutOctets: 4005927
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>     HwIfOutUcastPkts: 14152
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>     HwIfOutMcastPkts: 10385
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>     HwIfOutBcastPkts: 147
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>     HwIfInDiscards: 2435
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>     HwIfInL3Drops: 0
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>     HwIfInBufferDrops: 0
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>     HwIfInAclDrops: 0
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>     HwIfInDot3LengthErrors: 0
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>     HwIfInErrors: 0
 </span></code></pre></div>
 
 
