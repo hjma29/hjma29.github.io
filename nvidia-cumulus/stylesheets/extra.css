@@ -1,0 +1,37 @@
+/* Maximize content width for larger screens */
+@media screen and (min-width: 76.25em) {
+    .md-grid {
+        max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 100em) {
+    .md-grid {
+        max-width: 95%;
+    }
+}
+
+/* Wider main content area */
+.md-main__inner {
+    max-width: none;
+}
+
+.md-content {
+    max-width: none;
+}
+
+/* Make code blocks wider */
+.md-typeset pre {
+    max-width: 100%;
+}
+
+.md-typeset pre > code {
+    white-space: pre;
+    overflow-x: auto;
+    display: block;
+}
+
+/* Make tables wider */
+.md-typeset table:not([class]) {
+    max-width: 100%;
+}
