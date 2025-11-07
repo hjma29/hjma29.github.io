@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#obtain-synergy-virtual-connect-mgmt-ip-address" class="md-skip">
+        <a href="#ssh-access" class="md-skip">
           Skip to content
         </a>
       
@@ -359,15 +359,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#obtain-synergy-virtual-connect-mgmt-ip-address" class="md-nav__link">
-    <span class="md-ellipsis">
-      Obtain Synergy virtual connect mgmt IP address
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#ssh-access" class="md-nav__link">
     <span class="md-ellipsis">
       SSH Access
@@ -436,15 +427,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#obtain-synergy-virtual-connect-mgmt-ip-address" class="md-nav__link">
-    <span class="md-ellipsis">
-      Obtain Synergy virtual connect mgmt IP address
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#ssh-access" class="md-nav__link">
     <span class="md-ellipsis">
       SSH Access
@@ -500,9 +482,12 @@
 
 <p>Synergy Virtual Connect offers read-only CLI access. You need to use default "netop" operator account.</p>
 <p>For official HPE document on this feature, please refer to the doc at <a href="https://support.hpe.com/hpesc/public/docDisplay?docId=sf000074799en_us&amp;docLocale=en_US">Enable netop user using OneView GUI</a>.</p>
-<h2 id="obtain-synergy-virtual-connect-mgmt-ip-address">Obtain Synergy virtual connect mgmt IP address</h2>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/CleanShot%202025-11-06%20at%2010.09.09-1.png" data-desc-position="bottom"><img alt="Synergy VC mgmt IP address" src="../images/CleanShot%202025-11-06%20at%2010.09.09-1.png"></a></p>
 <h2 id="ssh-access">SSH Access</h2>
+<p>Step 1. Note down Synergy virtual connect mgmt IP address
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/CleanShot%202025-11-06%20at%2010.09.09-1.png" data-desc-position="bottom"><img alt="Synergy VC mgmt IP address" src="../images/CleanShot%202025-11-06%20at%2010.09.09-1.png"></a></p>
+<p>Step 2. Configure "netop" user password
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/CleanShot%202025-11-07%20at%2009.04.42.gif" data-desc-position="bottom"><img alt="configure netop password" src="../images/CleanShot%202025-11-07%20at%2009.04.42.gif"></a></p>
+<p>Step 3. SSH into VC mgmt IP address using </p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ssh &lt;virtual connect module mgmt IP address&gt;
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>This interconnect module is a company owned asset and provided for the exclusive use of authorized personnel. Unauthorized use or abuse of this system may lead to corrective action including termination, civil and/or criminal penalties.
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>netop@10.16.41.27's password:
@@ -673,7 +658,6 @@
 <tr>
 <td>
 
-
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>OneView&gt; dump np-la-db
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>port-channel                 : po2
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>port-channel interface index : 281
@@ -705,6 +689,7 @@
 
 </td>
 <td>
+
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>OneView# dump np-la-db
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>port-channel                 : po2
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>port-channel interface index : 281
