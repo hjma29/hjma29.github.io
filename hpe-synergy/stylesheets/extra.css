@@ -123,3 +123,8 @@ img[src$=".gif"] {
 .md-content img[src$=".gif"] {
     pointer-events: none;
 }
+
+/* Prevent glightbox from interfering with video playback */
+video {
+    pointer-events: auto !important;
+}
