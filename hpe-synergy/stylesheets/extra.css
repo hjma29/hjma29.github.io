@@ -113,3 +113,13 @@
 .md-content {
     max-width: none;
 }
+
+/* Disable glightbox for GIF images to preserve animation */
+img[src$=".gif"] {
+    cursor: default !important;
+}
+
+/* Prevent glightbox from wrapping GIF images */
+.md-content img[src$=".gif"] {
+    pointer-events: none;
+}
