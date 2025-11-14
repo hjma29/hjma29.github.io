@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hjma29.github.io/sitemap.xml
