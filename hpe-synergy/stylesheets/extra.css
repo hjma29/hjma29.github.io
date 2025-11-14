@@ -125,6 +125,6 @@ img[src$=".gif"] {
 }
 
 /* Prevent glightbox from interfering with video playback */
-video {
+/* video {
     pointer-events: auto !important;
-}
+} */
