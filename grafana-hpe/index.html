@@ -1,26 +1,25 @@
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
+<!DOCTYPE html><html lang="en" class="no-js"><head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
       
+        <link rel="canonical" href="https://hjma29.github.io/grafana-hpe/">
+      
       
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
-        <title>Grafana + Prometheus on HPE GreenLake with NVIDIA GPU</title>
+        <title>Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
@@ -37,19 +36,41 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-4PSC5ZE631"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-4PSC5ZE631",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-4PSC5ZE631",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
 
     
     
     
-  </head>
+  <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
   
   
     
@@ -57,13 +78,18 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#monitoring-hpe-greenlake-servers-running-gpus-using-grafana-cloud" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -73,25 +99,23 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Grafana + Prometheus on HPE GreenLake with NVIDIA GPU" class="md-header__button md-logo" aria-label="Grafana + Prometheus on HPE GreenLake with NVIDIA GPU" data-md-component="logo">
+    <a href="." title="Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud" class="md-header__button md-logo" aria-label="Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Grafana + Prometheus on HPE GreenLake with NVIDIA GPU
+            Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -113,7 +137,7 @@
       
         <label class="md-header__button md-icon" for="__search">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
         </label>
         <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -122,15 +146,15 @@
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
         </button>
       </nav>
       
@@ -159,6 +183,36 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -166,22 +220,26 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
 
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Grafana + Prometheus on HPE GreenLake with NVIDIA GPU" class="md-nav__button md-logo" aria-label="Grafana + Prometheus on HPE GreenLake with NVIDIA GPU" data-md-component="logo">
+    <a href="." title="Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud" class="md-nav__button md-logo" aria-label="Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 
     </a>
-    Grafana + Prometheus on HPE GreenLake with NVIDIA GPU
+    Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -190,10 +248,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="whitepaper/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
         
   
   
@@ -204,6 +284,221 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana-cloud-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grafana Cloud Dashboard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grafana Cloud Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-grafana-cloud-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Grafana Cloud Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-accessing-hpe-greenlake-compute-ops-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Accessing HPE GreenLake Compute Ops Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Accessing HPE GreenLake Compute Ops Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infinity-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infinity Data Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grafana-cloud-dashboard_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grafana Cloud Dashboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-and-helm-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes and Helm Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes and Helm Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-cluster-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes cluster setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-namespace-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes namespace setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helm-charts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helm Charts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-operator-chart-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU Operator chart customization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-utilization-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU utilization simulation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana-cloud-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grafana Cloud Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grafana Cloud Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-remote-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prometheus Remote Write
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-remote-write-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prometheus Remote Write Diagram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-grafana-cloud-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Grafana Cloud credentials
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-helm-release-with-configured-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Helm release with configured value
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proliant-server-nvidia-gpu-utilization-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proliant Server Nvidia GPU utilization dashboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acknowledgements
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -215,22 +510,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -240,9 +519,268 @@
 
 
 
-  <h1>Home</h1>
+<h1 id="monitoring-hpe-greenlake-servers-running-gpus-using-grafana-cloud">Monitoring HPE GreenLake Servers Running GPUs Using Grafana Cloud</h1>
+<h2 id="overview">Overview</h2>
+<p>HPE GreenLake Compute Ops Management provides a cloud-native platform for managing and monitoring compute infrastructure with built-in tools and dashboards. While Compute Ops Management offers comprehensive native monitoring capabilities, organizations can also leverage the Compute Ops Management REST API to integrate with popular open-source tools like Grafana and Prometheus. This approach enables teams to consolidate monitoring data across hybrid environments, utilize existing observability workflows, and create customized dashboards tailored to specific operational needs—particularly for GPU-accelerated workloads running on HPE servers.</p>
+<h2 id="grafana-cloud-dashboard">Grafana Cloud Dashboard</h2>
+<p>The following screenshot shows the Grafana Cloud dashboard monitoring HPE ProLiant servers, leveraging both HPE GreenLake Compute Ops Management APIs and NVIDIA Data Center GPU Manager (DCGM) exporter metrics.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-10.png" data-desc-position="bottom"><img alt="Grafana Cloud Dashboard" src="images/image-10.png"></a></p>
+<h3 id="benefits-of-grafana-cloud-integration">Benefits of Grafana Cloud Integration</h3>
+<p>Grafana Cloud provides a centralized monitoring platform that bridges both public cloud APIs and private infrastructure metrics, offering several key advantages:</p>
+<ul>
+<li>
+<p><strong>HPE GreenLake API Integration</strong>: Using the Infinity data source plugin, Grafana Cloud can directly query HPE GreenLake Compute Ops Management REST APIs to retrieve server health, firmware status, and hardware telemetry data from your public cloud-managed infrastructure</p>
+</li>
+<li>
+<p><strong>Internal Metrics Aggregation</strong>: Simultaneously receives GPU utilization, Kubernetes cluster metrics, and application performance data from your on-premises Prometheus instances via remote write protocol</p>
+</li>
+<li>
+<p><strong>Single Pane of Glass</strong>: Consolidates metrics from both HPE GreenLake-managed servers and local GPU workloads into unified dashboards</p>
+</li>
+</ul>
+<h2 id="api-accessing-hpe-greenlake-compute-ops-management">API Accessing HPE GreenLake Compute Ops Management</h2>
+<p>In order for Grafana Cloud to access HPE GreenLake Compute Ops Management, we need to first create client API user and obtain user secret. For details, please see <a href="https://developer.greenlake.hpe.com/docs/greenlake/guides/public/authentication/authentication#creating-a-personal-api-client">HPE GreenLake access token instructions</a></p>
+<p>The following screen shows the "Personal API endpoints" creation in the workspace dashboard.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-6.png" data-desc-position="bottom"><img alt="Create new personal API Client" src="images/image-6.png"></a></p>
+<p>You need to note down the client ID and secret so you can configure Grafana later using this information.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-7.png" data-desc-position="bottom"><img alt="Personal API Client ID and Secret " src="images/image-7.png"></a></p>
+<h3 id="infinity-data-source">Infinity Data Source</h3>
+<p>The Grafana Infinity data source enables direct integration with HPE GreenLake REST APIs, allowing users to query and visualize data from any HTTP/REST endpoint without requiring custom backend development. Originally a community-driven plugin, Infinity was officially adopted by Grafana Labs and is now maintained as part of the core Grafana ecosystem. This transition ensures long-term support, regular updates, and better integration with Grafana's authentication frameworks.</p>
+<p>Key capabilities include:</p>
+<ul>
+<li>
+<p><strong>REST API integration</strong> - Query HPE GreenLake Compute Ops Management APIs directly from Grafana</p>
+</li>
+<li>
+<p><strong>OAuth2 authentication</strong> - Native support for token-based authentication flows</p>
+</li>
+<li>
+<p><strong>Data transformation</strong> - Parse JSON responses and transform them into visualization-ready formats</p>
+</li>
+</ul>
+<p>This Infinity plugin supports automatic token refresh when accessing HPE GreenLake Compute Ops Management. The implementation leverages Go's built-in <code>golang.org/x/oauth2</code> library, which automatically handles token refresh logic when the access token expires. The OAuth2 token source automatically refreshes the access token using the refresh token before making API requests, ensuring uninterrupted authentication without manual intervention.</p>
+<p>The configuration of the Infinity data source is shown below. Users need to provide the HPE GreenLake API Client ID/Secret and also allow access to the API endpoints.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-8.png" data-desc-position="bottom"><img alt="Grafana Cloud Infinity Datasource" src="images/image-8.png"></a></p>
+<h3 id="grafana-cloud-dashboard_1">Grafana Cloud Dashboard</h3>
+<p>With the Infinity data source successfully configured, users can configure the dashboard to query information following the <a href="https://developer.greenlake.hpe.com/docs/greenlake/services/compute-ops-mgmt/public">HPE Compute Ops Management API Guide</a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-9.png" data-desc-position="bottom"><img alt="Grafana Cloud Dashboard" src="images/image-9.png"></a></p>
+<h2 id="kubernetes-and-helm-setup">Kubernetes and Helm Setup</h2>
+<h3 id="kubernetes-cluster-setup">Kubernetes cluster setup</h3>
+<p>This demonstration environment utilizes a high-availability Kubernetes cluster consisting of three control plane nodes and two worker nodes.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ k get node -o wide
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME                                STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>c2-cp-01.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.51   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>c2-cp-02.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.52   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>c2-cp-03.hst.enablement.local       Ready    control-plane   80d   v1.32.5   10.16.160.53   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>c2-worker-01.hst.enablement.local   Ready    &lt;none&gt;          80d   v1.32.5   10.16.160.54   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>c2-worker-02.hst.enablement.local   Ready    &lt;none&gt;          80d   v1.32.5   10.16.160.55   &lt;none&gt;        Ubuntu 22.04.5 LTS   5.15.0-144-generic   containerd://2.0.5
+</span></code></pre></div>
+<h3 id="kubernetes-namespace-setup">Kubernetes namespace setup</h3>
+<p>The cluster is equipped with the <code>gpu-operator</code> namespace for NVIDIA GPU management and the <code>monitoring</code> namespace hosting the Prometheus stack, with external access enabled via NodePort services.
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ kubectl get ns | grep -vE '^(kube-|default)'
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>NAME              STATUS   AGE
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gpu-operator      Active   80d
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>monitoring        Active   56d
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>$ k get svc -n gpu-operator 
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>gpu-operator           ClusterIP   10.233.44.80   &lt;none&gt;        8080/TCP   78d
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>nvidia-dcgm-exporter   ClusterIP   10.233.15.59   &lt;none&gt;        9400/TCP   78d
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>$ k get svc --field-selector spec.type=NodePort -n monitoring
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>NAME                               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>kube-prometheus-stack-grafana      NodePort   10.233.22.241   &lt;none&gt;        80:30080/TCP                    56d
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>kube-prometheus-stack-prometheus   NodePort   10.233.8.106    &lt;none&gt;        9090:30090/TCP,8080:30398/TCP   56d
+</span></code></pre></div><p></p>
+<h3 id="helm-charts">Helm Charts</h3>
+<p>The environment uses Helm to manage two key components: the NVIDIA GPU Operator for GPU resource management and the Kube Prometheus Stack for monitoring and observability.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ helm list -A
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>gpu-operator-1753140595 gpu-operator    4               2025-08-14 19:20:42.329819669 -0700 MST deployed        gpu-operator-v25.3.2            v25.3.2    
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>kube-prometheus-stack   monitoring      5               2025-08-15 13:06:31.169338089 -0700 MST deployed        kube-prometheus-stack-76.3.
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>0    v0.84.1    
+</span></code></pre></div>
+<h3 id="gpu-operator-chart-customization">GPU Operator chart customization</h3>
+<p>The NVIDIA GPU Operator Helm chart deploys a DCGM (Data Center GPU Manager) exporter by default, but there are important nuances:</p>
+<ul>
+<li>
+<p>The DCGM exporter Pod will be created automatically when the operator detects a node with an NVIDIA GPU and the dcgm-exporter component is enabled in its values.
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ k -n gpu-operator get pods -o wide | grep dcgm
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nvidia-dcgm-exporter-gkg6d                                        1/1     Running     0          56d   10.233.117.209   c2-worker-01.hst.enablement.local   &lt;none&gt;           &lt;none&gt;
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>nvidia-dcgm-exporter-r2np6                                        1/1     Running     0          56d   10.233.114.15    c2-worker-02.hst.enablement.local   &lt;none&gt;           &lt;none&gt;
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>In the stock gpu-operator Helm chart from NVIDIA's repository, the DCGM exporter is enabled by default (<code>dcgmExporter.enabled: true</code>), but the ServiceMonitor is disabled by default (<code>serviceMonitor.enabled: false</code>). See the <a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#operator-install-guide">NVIDIA GPU Operator Documentation</a>.</p>
+</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-4.png" data-desc-position="bottom"><img alt="GPU Operator Configuration" src="images/image-4.png"></a></p>
+<p>You can also verify these default built-in values using the <code>helm show values</code> command. 
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ helm show values nvidia/gpu-operator | grep -A 15 dcgmExporter
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>dcgmExporter:
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  enabled: true
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  repository: nvcr.io/nvidia/k8s
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  image: dcgm-exporter
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  version: 4.3.1-4.4.0-ubuntu22.04
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  imagePullPolicy: IfNotPresent
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  env: []
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  resources: {}
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  service:
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    internalTrafficPolicy: Cluster
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>  serviceMonitor:
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    enabled: false
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    interval: 15s
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    honorLabels: false
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    additionalLabels: {}
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    relabelings: []
+</span></code></pre></div><p></p>
+<p>We need to enable  the ServiceMonitor (<code>dcgmExporter.serviceMonitor.enabled: true</code>) in order for Prometheus to automatically scrape the DCGM exporter.</p>
+<p>The gpu-operator is configured with custom values to enable Prometheus integration. The DCGM exporter runs as a ClusterIP service with ServiceMonitor enabled for automatic metrics discovery by Prometheus.
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ helm get values gpu-operator-1753140595 -n gpu-operator
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>USER-SUPPLIED VALUES:
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>dcgmExporter:
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  service:
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    type: ClusterIP
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  serviceMonitor:
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    enabled: true
+</span></code></pre></div><p></p>
+<h3 id="gpu-utilization-simulation">GPU utilization simulation</h3>
+<p>To simulate GPU load and verify monitoring functionality, we deployed a test pod running the gpu-burn utility. This tool performs intensive GPU computations, allowing us to observe GPU utilization metrics in our monitoring dashboards.</p>
+<p>The following YAML manifest creates a pod that clones the gpu-burn repository, compiles it, and runs continuous GPU stress testing:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-burn</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">containers</span><span class="p">:</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-burn</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia/cuda:12.2.0-devel-ubuntu22.04</span><span class="w"> </span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"/bin/bash"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"-c"</span><span class="p p-Indicator">]</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">            </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">                    </span><span class="no">apt update &amp;&amp; apt install -y git build-essential &amp;&amp; \</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">                    </span><span class="no">git clone https://github.com/wilicc/gpu-burn.git &amp;&amp; \</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">                    </span><span class="no">cd gpu-burn &amp;&amp; make &amp;&amp; ./gpu_burn 999999 </span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">            </span><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">                </span><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">                    </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
+</span></code></pre></div>
+<p><strong>Key configuration details:</strong>
+- <strong>Base image</strong>: <code>nvidia/cuda:12.2.0-devel-ubuntu22.04</code> provides the CUDA development environment<br>
+- <strong>GPU allocation</strong>: <code>nvidia.com/gpu: 1</code> requests a single GPU from the cluster<br>
+- <strong>Runtime</strong>: <code>gpu_burn 999999</code> runs for approximately 277 hours (effectively continuous)<br>
+- <strong>Restart policy</strong>: <code>Never</code> ensures the pod completes its run without automatic restarts  </p>
+<p>Deploy the pod using:
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl apply -f gpu-burn.yaml
+</span></code></pre></div><p></p>
+<h2 id="grafana-cloud-integration">Grafana Cloud Integration</h2>
+<p>While the local Grafana deployment provides comprehensive monitoring capabilities, organizations often need to share dashboards with team members who cannot directly access the internal infrastructure. Grafana Cloud offers an ideal solution by enabling metrics to be pushed from the local Prometheus instance to a cloud-hosted environment, making dashboards accessible to remote teams without requiring VPN or direct network access.</p>
+<h3 id="prometheus-remote-write">Prometheus Remote Write</h3>
+<p>Grafana Cloud supports Prometheus remote write protocol, allowing local Prometheus to continuously push metrics to the cloud. This approach offers several advantages:</p>
+<ul>
+<li><strong>No inbound firewall rules required</strong> - Metrics are pushed outbound from the lab</li>
+<li><strong>Real-time data synchronization</strong> - Metrics appear in Grafana Cloud within seconds</li>
+<li><strong>Selective metric filtering</strong> - Control which metrics are sent to manage costs</li>
+<li><strong>Multi-cluster aggregation</strong> - Consolidate metrics from multiple environments</li>
+</ul>
+<p>The integration involves two main steps:</p>
+<ol>
+<li><strong>Configure Grafana Cloud credentials</strong> - Create a Prometheus remote write endpoint and API key in Grafana Cloud</li>
+<li><strong>Update Prometheus configuration</strong> - Add remote write settings to the kube-prometheus-stack Helm values</li>
+</ol>
+<h3 id="prometheus-remote-write-diagram">Prometheus Remote Write Diagram</h3>
+<p>The following diagram from Grafana Cloud documentation shows the architecture of Prometheus remote write. <br></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/image-5.png" data-desc-position="bottom"><img alt="Prometheus Remote Write" src="images/image-5.png"></a></p>
+<p><strong>How it works:</strong>
+1. Prometheus scrapes metrics from all targets (DCGM exporter, kube-state-metrics, etc.)
+2. Stores metrics locally in TSDB (Time Series Database)
+3. Simultaneously pushes metrics to Grafana Cloud via remote write
+4. Local Grafana and Prometheus UI can query local data
+5. Grafana Cloud receives a copy of all metrics</p>
+<h3 id="configure-grafana-cloud-credentials">Configure Grafana Cloud credentials</h3>
+<p>Users should log in to <code>grafana.com</code> to access their Grafana stack and retrieve the Prometheus cloud instance API endpoint by selecting "Details".</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/CleanShot%202025-10-20%20at%2009.38.20.png" data-desc-position="bottom"><img alt="Grafana Cloud Portal" src="images/CleanShot%202025-10-20%20at%2009.38.20.png"></a></p>
+<p>Select "Prometheus Details"</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/CleanShot%202025-10-20%20at%2009.41.58.png" data-desc-position="bottom"><img alt="Stack Dashboard" src="images/CleanShot%202025-10-20%20at%2009.41.58.png"></a></p>
+<p>In the <code>Prometheus Instance Details</code> page, please note "Remote Write Endpoint", "Instance ID" and generate "API Token"</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/CleanShot%202025-10-20%20at%2009.48.41.png" data-desc-position="bottom"><img alt="Prometheus Instance Details" src="images/CleanShot%202025-10-20%20at%2009.48.41.png"></a></p>
+<h3 id="updating-helm-release-with-configured-value">Updating Helm release with configured value</h3>
+<ol>
+<li>
+<p>Create a Kubernetes secret to store the username and password to access the Prometheus cloud instance
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ GRAFANA_CLOUD_USER="&lt;your userid here&gt;"
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>$ GRAFANA_CLOUD_PASSWORD="&lt;you token here&gt;"
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>$ kubectl create secret generic grafana-cloud-credentials \
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  --from-literal=username="${GRAFANA_CLOUD_USER}" \
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>  --from-literal=password="${GRAFANA_CLOUD_PASSWORD}" \
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>  -n monitoring
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>secret/grafana-cloud-credentials created
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>Create a Helm custom values YAML file
+</p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="l l-Scalar l-Scalar-Plain">$ cat prometheus-remote-write-values.yaml</span><span class="w"> </span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="l l-Scalar l-Scalar-Plain">prometheus</span><span class="p p-Indicator">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">prometheusSpec</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">remoteWrite</span><span class="p">:</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://&lt;your-prometheus-id-here&gt;.grafana.net/api/prom/push</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="nt">basicAuth</span><span class="p">:</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">          </span><span class="nt">username</span><span class="p">:</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-cloud-credentials</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">username</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">          </span><span class="nt">password</span><span class="p">:</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-cloud-credentials</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>Upgrade the Helm release
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack   -n monitoring   -f prometheus-remote-write-values.yaml   --reuse-values
+</span></code></pre></div><p></p>
+</li>
+</ol>
+<h3 id="proliant-server-nvidia-gpu-utilization-dashboard">Proliant Server Nvidia GPU utilization dashboard</h3>
+<p>The following screen shows the Grafana Cloud dashboard of HPE Proliant Server Nvidia GPU Utilization.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/CleanShot%202025-10-20%20at%2010.35.20.png" data-desc-position="bottom"><img alt="GPU Utilization Panel" src="images/CleanShot%202025-10-20%20at%2010.35.20.png"></a></p>
+<p>The corresponding server GPU utilization from <code>nvidia-smi</code> is shown below.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ ssh user01@c2-worker-02.hst.enablement.local nvidia-smi
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Mon Oct 20 13:55:11 2025       
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>+-----------------------------------------------------------------------------------------+
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>| NVIDIA-SMI 570.133.20             Driver Version: 570.133.20     CUDA Version: 12.8     |
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>|-----------------------------------------+------------------------+----------------------+
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>|                                         |                        |               MIG M. |
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>|=========================================+========================+======================|
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>|   0  NVIDIA L40S-4C                 On  |   00000000:02:00.0 Off |                    0 |
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>| N/A   N/A    P0            N/A  /  N/A  |    3002MiB /   4096MiB |     99%      Default |
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>|                                         |                        |                  N/A |
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>+-----------------------------------------+------------------------+----------------------+
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>+-----------------------------------------------------------------------------------------+
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>| Processes:                                                                              |
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>|        ID   ID                                                               Usage      |
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>|=========================================================================================|
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>|    0   N/A  N/A         3712514      C   ./gpu_burn                             2997MiB |
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>+-----------------------------------------------------------------------------------------+
+</span></code></pre></div>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Special thanks to HPE's Lionel Jullien for his excellent work on HPE GreenLake Compute Ops Management. The Grafana dashboard in this article was based on his previous work and articles as below.</p>
+<ul>
+<li>
+<p><a href="https://developer.hpe.com/blog/how-to-monitor-hpe-compute-ops-management/">How to monitor HPE GreenLake Compute Ops Management infrastructure with Grafana Metrics Dashboards</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jullienl/HPE-Compute-Ops-Management/tree/main">GitHub repository for HPE GreenLake Compute Ops Management</a></p>
+</li>
+<li>
+<p><a href="https://www.postman.com/jullienl/lionel-jullien-s-public-workspace/collection/g40uur1/hpe-compute-ops-management">Postman collection for HPE GreenLake Compute Ops Management RESTful API</a></p>
+</li>
+</ul>
 
-<p>Home</p>
 
 
 
@@ -251,6 +789,7 @@
 
 
 
+  
 
 
 
@@ -272,11 +811,6 @@
       <div class="md-copyright">
   
   
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
 </div>
       
     </div>
@@ -291,11 +825,13 @@
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.tabs", "navigation.indexes", "toc.integrate"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
-  </body>
-</html>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
