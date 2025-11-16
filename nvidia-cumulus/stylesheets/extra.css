@@ -35,3 +35,9 @@
 .md-typeset table:not([class]) {
     max-width: 100%;
 }
+
+
+.md-sidebar--primary .md-nav__title {
+  display: none !important;
+}
+
