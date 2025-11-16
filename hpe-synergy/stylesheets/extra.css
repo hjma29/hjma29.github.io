@@ -124,7 +124,6 @@ img[src$=".gif"] {
     pointer-events: none;
 }
 
-/* Prevent glightbox from interfering with video playback */
-/* video {
-    pointer-events: auto !important;
-} */
+.md-sidebar--primary .md-nav__title {
+  display: none !important;
+}
