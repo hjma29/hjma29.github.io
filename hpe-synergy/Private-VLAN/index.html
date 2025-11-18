@@ -22,7 +22,7 @@
     
     
       
-        <title>HPE Synergy Private VLAN with Cisco Nexus Switches - HPE Synergy Technical Notes</title>
+        <title>HPE Synergy Virtual Connect Private VLAN(PVLAN) with Cisco Nexus Switches - HPE Synergy Technical Notes</title>
       
     
     
@@ -95,7 +95,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hpe-synergy-private-vlan-with-cisco-nexus-switches" class="md-skip">
+        <a href="#hpe-synergy-virtual-connect-private-vlanpvlan-with-cisco-nexus-switches" class="md-skip">
           Skip to content
         </a>
       
@@ -131,7 +131,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HPE Synergy Private VLAN with Cisco Nexus Switches
+              HPE Synergy Virtual Connect Private VLAN(PVLAN) with Cisco Nexus Switches
             
           </span>
         </div>
@@ -260,7 +260,7 @@
   <span class="md-ellipsis">
     
   
-    HPE Synergy and Cisco ACI InterOp
+    HPE Synergy and Cisco ACI Intergration and InterOp
   
 
     
@@ -289,6 +289,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPE Synergy Virtual Connect Private VLAN(PVLAN) with Cisco Nexus Switches
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -296,7 +314,7 @@
   <span class="md-ellipsis">
     
   
-    HPE Synergy Private VLAN with Cisco Nexus Switches
+    HPE Synergy Virtual Connect Private VLAN(PVLAN) with Cisco Nexus Switches
   
 
     
@@ -305,6 +323,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synergy-vc-pvlan-with-nexus-switches-in-depth-white-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synergy VC PVLAN with Nexus Switches In-Depth White Paper
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synergy-vc-pvlan-with-nexus-switches-foundation-white-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synergy VC PVLAN with Nexus Switches Foundation White Paper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -357,6 +427,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synergy-vc-pvlan-with-nexus-switches-in-depth-white-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synergy VC PVLAN with Nexus Switches In-Depth White Paper
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synergy-vc-pvlan-with-nexus-switches-foundation-white-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synergy VC PVLAN with Nexus Switches Foundation White Paper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -372,8 +483,17 @@
 
 
 
-<h1 id="hpe-synergy-private-vlan-with-cisco-nexus-switches">HPE Synergy Private VLAN with Cisco Nexus Switches</h1>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/pvlan-setup-topology.png" data-desc-position="bottom"><img alt="toplogogy" src="../images/pvlan-setup-topology.png"></a></p>
+<h1 id="hpe-synergy-virtual-connect-private-vlanpvlan-with-cisco-nexus-switches">HPE Synergy Virtual Connect Private VLAN(PVLAN) with Cisco Nexus Switches</h1>
+<p>The following two white papers give a good overview on how to configure HPE Synergy Private VLAN and how it works with other switches like Cisco Nexus and VMware DVS.</p>
+<h2 id="network-topology">Network Topology</h2>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/pvlan-setup-topology.png" data-desc-position="bottom"><img alt="Network Topology" src="../images/pvlan-setup-topology.png"></a></p>
+<h2 id="synergy-vc-pvlan-with-nexus-switches-in-depth-white-paper">Synergy VC PVLAN with Nexus Switches In-Depth White Paper</h2>
+<p>This is the white paper I authored focus on clarification on how to configure Cisco Nexus to integrate with Synergy Virtual Connect. It goes in depth showing how packets flow in the context of Private-VLAN.</p>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://hjma29.github.io/hpe-synergy/files/hpe-synergy/docs/files/Synergy-Private-VLAN-with-Cisco-Nexus-Technical-Review.pdf" width="100%" height="600px" style="border: none;">
+</iframe>
+
+<h2 id="synergy-vc-pvlan-with-nexus-switches-foundation-white-paper">Synergy VC PVLAN with Nexus Switches Foundation White Paper</h2>
+<p>My white paper is based on the following nice paper when Private VLAN was first introduced in HPE Synergy Oneview. It's well written and still valid as of 2025.</p>
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://hjma29.github.io/hpe-synergy/files/Private-VLAN-in-OneView-4.20.pdf" width="100%" height="600px" style="border: none;">
 </iframe>
 
