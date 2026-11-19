@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
+    <loc>https://hjma29.github.io/sitemap-home.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://hjma29.github.io/proliant-mcp/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://hjma29.github.io/proliant-cli/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://hjma29.github.io/nebius-iac/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>https://hjma29.github.io/grafana-hpe/sitemap.xml</loc>
   </sitemap>
   <sitemap>

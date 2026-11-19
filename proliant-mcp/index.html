@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProLiant MCP – MCP server for HPE iLO, Compute Ops Management &amp; OneView</title>
+    <meta name="description" content="proliant-mcp is an open-source MCP server that gives AI assistants (GitHub Copilot, Claude, Codex) read-only access to HPE ProLiant iLO (Redfish), HPE Compute Ops Management (GreenLake) and HPE OneView / Synergy. Install with uvx proliant-mcp@latest.">
+    <link rel="canonical" href="https://hjma29.github.io/proliant-mcp/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ProLiant MCP – MCP server for HPE iLO, Compute Ops Management &amp; OneView">
+    <meta property="og:description" content="Ask your AI assistant about your HPE servers. Read-only MCP tools for ProLiant iLO, HPE Compute Ops Management and HPE OneView / Synergy.">
+    <meta property="og:url" content="https://hjma29.github.io/proliant-mcp/">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "proliant-mcp",
+      "alternateName": "ProLiant MCP",
+      "description": "MCP server that gives AI assistants read-only access to HPE ProLiant iLO (Redfish), HPE Compute Ops Management (GreenLake) and HPE OneView / Synergy.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "license": "https://opensource.org/licenses/MIT",
+      "url": "https://hjma29.github.io/proliant-mcp/",
+      "downloadUrl": "https://pypi.org/project/proliant-mcp/",
+      "sameAs": ["https://github.com/hjma29/proliant-mcp", "https://pypi.org/project/proliant-mcp/"],
+      "author": {"@type": "Person", "name": "Hongjun Ma", "url": "https://github.com/hjma29"},
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PSC5ZE631"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PSC5ZE631');
+    </script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #222;
+        }
+        h1 { font-size: 2rem; margin-bottom: 4px; }
+        h2 { margin-top: 40px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+        .tagline { color: #555; font-size: 1.15rem; margin-top: 0; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .links a { margin-right: 18px; font-weight: 600; }
+        pre, code { font-family: SFMono-Regular, Menlo, Consolas, monospace; }
+        pre { background: #f6f8fa; padding: 12px 14px; border-radius: 6px; overflow-x: auto; }
+        code { background: #f6f8fa; padding: 1px 4px; border-radius: 4px; }
+        pre code { padding: 0; background: none; }
+        table { border-collapse: collapse; width: 100%; margin: 10px 0 20px; }
+        th, td { text-align: left; border-bottom: 1px solid #eee; padding: 6px 8px; vertical-align: top; }
+        th { background: #fafafa; }
+        blockquote { margin: 0; padding: 4px 14px; border-left: 4px solid #ddd; color: #444; }
+        footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <p><a href="/">&larr; Hongjun Ma – Technical Projects</a></p>
+
+    <h1>ProLiant MCP</h1>
+    <p class="tagline">An open-source MCP server for HPE compute: ask your AI assistant about your HPE ProLiant servers through HPE iLO (Redfish), HPE Compute Ops Management (GreenLake) and HPE OneView / Synergy.</p>
+
+    <p class="links">
+        <a href="https://github.com/hjma29/proliant-mcp">GitHub repository</a>
+        <a href="https://pypi.org/project/proliant-mcp/">PyPI package</a>
+        <a href="https://github.com/hjma29/proliant-mcp/blob/main/docs/tools.md">Tool reference</a>
+        <a href="https://github.com/hjma29/proliant-mcp/blob/main/CHANGELOG.md">Changelog</a>
+    </p>
+
+    <h2>What is proliant-mcp?</h2>
+    <p><strong>proliant-mcp</strong> is a <a href="https://modelcontextprotocol.io">Model Context Protocol (MCP)</a> server. It gives AI assistants such as GitHub Copilot, Claude, Codex and opencode <strong>read-only</strong> access to your HPE server management tools, so you can ask questions in plain English instead of clicking through iLO, GreenLake or OneView consoles.</p>
+    <p>Ask things like:</p>
+    <ul>
+        <li><em>"Which servers in Compute Ops Management are critical and why?"</em></li>
+        <li><em>"Show a table of each server's storage controller and GPU."</em></li>
+        <li><em>"Any active OneView alerts on the Synergy frame?"</em></li>
+        <li><em>"Which server is iLO 10.1.2.3, and what firmware is it running?"</em></li>
+        <li><em>"Summarize warning and critical IML events across all my iLOs for the last 7 days."</em></li>
+    </ul>
+
+    <h2>Install</h2>
+    <p><strong>Option 1 – ask your AI agent.</strong> Paste this into GitHub Copilot, Claude, Codex or opencode:</p>
+    <blockquote>Install the proliant-mcp MCP server for me. Follow the instructions at https://raw.githubusercontent.com/hjma29/proliant-mcp/main/AGENTS.md (install uv first if it is missing), then tell me when to restart you.</blockquote>
+
+    <p><strong>Option 2 – manual.</strong> Install <a href="https://docs.astral.sh/uv/">uv</a>, then add this to your AI client's MCP configuration and restart the client:</p>
+<pre><code>{"servers": {"proliant": {"type": "stdio", "command": "uvx", "args": ["proliant-mcp@latest"]}}}</code></pre>
+    <p>In Claude Desktop use <code>mcpServers</code> instead of <code>servers</code>. Then just ask your assistant to <em>"sign in to HPE GreenLake"</em>, <em>"add my iLO"</em> or <em>"add my OneView"</em>. Passwords are typed on a page on your own computer, never in the chat.</p>
+
+    <h2>Supported HPE platforms and tools</h2>
+
+    <h3>HPE iLO (Redfish) – per server and fleet</h3>
+    <table>
+        <tr><th>Tool</th><th>What it returns</th></tr>
+        <tr><td><code>get_server_summary</code> / <code>get_fleet_summary</code></td><td>Model, serial, power and POST state, health, BIOS and iLO version, CPU/memory, running OS and boot order – for one or all iLOs</td></tr>
+        <tr><td><code>get_health</code>, <code>get_firmware_inventory</code></td><td>Per-subsystem health, fan/PSU redundancy, every firmware component</td></tr>
+        <tr><td><code>get_processors</code>, <code>get_memory</code>, <code>get_storage</code>, <code>get_network_adapters</code></td><td>CPUs and GPUs, DIMMs, RAID controllers and drives, NICs with LLDP switch neighbors</td></tr>
+        <tr><td><code>get_event_log</code>, <code>get_fleet_event_summary</code>, <code>get_ilo_logins</code></td><td>IML, IEL and Security Log filtering and summaries, iLO login audit</td></tr>
+    </table>
+
+    <h3>HPE Compute Ops Management (GreenLake)</h3>
+    <table>
+        <tr><th>Tool</th><th>What it returns</th></tr>
+        <tr><td><code>com_get_overview</code></td><td>Fleet health, power, connection and subscription report with servers needing attention</td></tr>
+        <tr><td><code>com_list_servers</code>, <code>com_get_server</code></td><td>Server inventory and per-server detail, firmware and alerts</td></tr>
+        <tr><td><code>com_hardware_report</code>, <code>com_list_nics</code>, <code>com_list_gpus</code></td><td>Whole-fleet hardware, NIC/HBA and GPU reports in one call</td></tr>
+        <tr><td><code>com_list_alerts</code>, <code>com_list_jobs</code>, <code>com_list_groups</code>, <code>com_list_firmware_bundles</code></td><td>Alerts, firmware-update jobs, group compliance, SPP bundles</td></tr>
+    </table>
+
+    <h3>HPE OneView / Synergy</h3>
+    <table>
+        <tr><th>Tool</th><th>What it returns</th></tr>
+        <tr><td><code>oneview_get_appliance</code>, <code>oneview_list_alerts</code></td><td>Appliance health and active alerts with corrective actions</td></tr>
+        <tr><td><code>oneview_list_server_hardware</code>, <code>oneview_list_server_profiles</code></td><td>Servers, profiles, templates and firmware compliance</td></tr>
+        <tr><td><code>oneview_list_enclosures</code>, <code>oneview_list_interconnects</code>, <code>oneview_list_uplink_sets</code></td><td>Synergy frames, Virtual Connect modules and uplink status with LLDP neighbors</td></tr>
+    </table>
+    <p>See the full <a href="https://github.com/hjma29/proliant-mcp/blob/main/docs/tools.md">tool reference</a> on GitHub.</p>
+
+    <h2>Security</h2>
+    <p>All server tools are read-only. Credentials stay on your computer and are never sent to the AI model. The setup tools only edit a local inventory file and never take a password as an argument.</p>
+
+    <h2>Related projects</h2>
+    <ul>
+        <li><a href="/proliant-cli/">ProLiant CLI</a> – terminal CLI for HPE ProLiant iLO, Compute Ops Management and Synergy OneView</li>
+        <li><a href="/hpe-synergy/">HPE Synergy</a></li>
+    </ul>
+
+    <footer>
+        proliant-mcp is MIT licensed by <a href="https://github.com/hjma29">Hongjun Ma</a>. Not an official HPE product.
+    </footer>
+</body>
+</html>
